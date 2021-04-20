@@ -4,12 +4,6 @@
 #   hard-coded/user-defined attributes that make up this Batch Connect app.
 ---
 
-# **MUST** set cluster id here that matches cluster configuration file located
-# under /etc/ood/config/clusters.d/*.yml
-# @example Use the Owens cluster at Ohio Supercomputer Center
-#     cluster: "owens"
-cluster: ""
-
 # Define attribute values that aren't meant to be modified by the user within
 # the Dashboard form
 attributes:
@@ -40,10 +34,12 @@ attributes:
 # @note If an attribute listed below is hard-coded above in the `attributes`
 #   option, then it will not appear in the form page that the user sees in the
 #   Dashboard
+  bc_num_slots: 1
+  bc_queue: "testflight-coda"
+  bc_email_on_started: null
 form:
   - modules
   - extra_jupyter_args
-  - bc_account
   - bc_queue
   - bc_num_hours
   - bc_num_slots
