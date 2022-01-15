@@ -1,0 +1,152 @@
+<%-
+  require "csv"
+  cmd = "python /var/opt/mam/bin/mam-accounts.py"
+  begin
+    output, status = Open3.capture2e(cmd)
+    if status.success?
+      accounts = output.split("\n").map(&:strip).reject(&:blank?).sort
+    else
+      raise output
+    end
+  rescue => e
+    accounts = []
+    error = e.message.strip
+  end
+  output= File.read('/storage/coda1/pace-admins/shared/ondemand-jupyter-notebooks/templates.txt')
+  templates = CSV.parse(output)
+-%>
+---
+title: "Jupyter"
+cluster: "phoenix"
+attributes:
+  modules: "anaconda3/2020.11"
+  #modules:
+  #  widget: select
+  #  label: "Anaconda Version"
+  #  help: "This defines the version of Anaconda3 you want to load."
+  #  options:
+  #    - [ "Anaconda 3 - 2020.11", "anaconda3/2020.11" ]
+  extra_jupyter_args: ""
+  custom_shell_text:
+    widget: text_area
+    help: |
+      WARNING: use with care as this field gets inserted into your job script. 
+      Example text:
+      conda activate base
+  desktop: "gnome"
+  bc_vnc_idle: 0
+  bc_vnc_resolution:
+    required: true
+  node_type:
+    widget: select
+    label: "Node Type"
+    cacheable: false
+    options:
+      - [ "CPU Only", "cpu"]
+      - [ "CPU with Local SAS", "cpusas"]
+      - [ "GPU RTX6000", "RTX6000"]
+      - [ "GPU TeslaV100-16GB", "TeslaV100-16GB"]
+      - [ "GPU TeslaV100-32GB", "TeslaV100-32GB"]
+  num_gpus:
+    id: num_gpus
+    label: GPUs Per Node
+    help: "Number of Cuda enabled devices (GPUs: maximum 4 RTX6000 GPUs/Node, maximum 2 V100 GPUs/Node)."
+    max: 4
+    min: 0
+    step: 1
+    value: 0
+    widget: number_field
+    cacheable: false
+  custom_queue:
+    widget: select
+    id: bc_queue
+    label: "Phoenix Queue"
+    cacheable: false
+    options:
+      - [ "Inferno - main and default queue (charges credits)", "inferno"]
+      - [ "Embers - low priority, preemptible backfill queue (8 hour limit)", "embers"]
+  custom_template:
+    widget: select
+    label: "Starting Template"
+    cacheable: false
+    options:
+      - [ "None - use Jupyter to select file to work on", ""]
+      - [ "Python3 - template to show how to work custom environments", "Python3.ipynb"]
+      - [ "Julia - template to show how to work with user Julia envionments", "Julia.ipynb"]
+  num_cores:
+    help: 'Number of CPUs/Cores (up to 24 per Node).'
+    id: num_cores
+    label: CPUs/Cores Per Node
+    max: 24
+    min: 1
+    step: 1
+    value: 1
+    widget: number_field
+    cacheable: false
+  num_mem_per_core:
+    help: "Leave the field blank if unsure.\nTotal memory for job is: Nodes X Cores X Memory per CPU/Core (maximum 32GB per core)."
+    id: num_mem_per_core
+    label: Memory per CPU/Core (GB)
+    value: ""
+    max: 32
+    widget: number_field
+    cacheable: false
+  email:
+    help: 'Leave the field blank if you don''t want to be notified.'
+    id: email
+    label: Email
+    widget: text_field
+    cacheable: false
+  bc_num_hours:
+    value: 1
+    label: 'Number of Hours'
+  bc_account:
+    label: Account
+    help: |
+      Please select an account from the drop-down.
+    <%- if error -%>
+
+      <span class="text-danger">Error when parsing accounts:</span>
+
+      ```
+      <%= error.gsub("\n", "\n      ") %>
+      ```
+    <%- end -%>
+    widget: select
+    options:
+    <%- accounts.each do |a| -%>
+      - [ "<%= a %>", "<%= a %>" ]
+    <%- end -%>
+  custom_template:
+    label: "Starting Interface/Template"
+    <%- if error -%>
+
+      <span class="text-danger">Error when parsing templates:</span>
+
+      ```
+      <%= error.gsub("\n", "\n      ") %>
+      ```
+    <%- end -%>
+    widget: select
+    options:
+      - [ "Interface: Jupyter Notebook - use Jupyter to select file to work on", ""]
+      - [ "Interface: JupyterLab - use JupyterLab to select file to work on", "lab"]
+      - [ "Interface: PyTorch - (uses Singularity ngc-20.12-py3 container) use Jupyter to select file to work on", "pytorch"]
+      - [ "Interface: TensorFlow - (uses Singularity tensorflow-2.5.0-gpu container) use Jupyter to select file to work on", "tensorflow"]
+    <%- templates.each do |a| -%>
+      - [ "<%= a[0] %>", "<%= a[1] %>" ]
+    <%- end -%>
+
+form:
+  - modules
+  - extra_jupyter_args
+  - desktop
+  - bc_account
+  - email
+  - custom_queue
+  - node_type
+  - num_gpus
+  - num_cores
+  - num_mem_per_core
+  - bc_num_hours
+  - custom_template

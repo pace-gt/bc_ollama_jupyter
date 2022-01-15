@@ -1,1 +1,25 @@
-/etc/ood/config/apps/all_apps/submit.yml.erb
+---
+batch_connect:
+  template: vnc
+script:
+  queue_name: <%= custom_queue %>
+  native:
+    <%- if num_gpus.to_i >0 -%>
+      - "-l nodes=1:ppn=<%= num_cores.blank? ? 1 : num_cores.to_i %>:gpus=<%= num_gpus.to_i %>:<%= node_type %>"
+    <%- else -%>
+      <%- if node_type == "cpusas" -%>
+      - "-l nodes=1:ppn=<%= num_cores.blank? ? 1 : num_cores.to_i %>:local-sas"
+      <%- else -%>
+      - "-l nodes=1:ppn=<%= num_cores.blank? ? 1 : num_cores.to_i %>"
+      <%- end -%>
+    <%- end -%>
+
+    <%- unless email.blank? -%>
+      - "-M <%= email %>"
+      - "-m abe"
+    <%- end -%>
+
+    <%- unless num_mem_per_core.blank? -%>
+      - "-l pmem=<%= num_mem_per_core.to_i %>gb"
+    <%- end -%>
+
