@@ -13,9 +13,9 @@ cd "${HOME}"
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 module purge
-
 # Load the require modules
 module load <%= context.modules %>
+export PYTHONPATH=$PYTHONROOT/lib/python3.8/site-packages:$PYTHONPATH
 
 # List loaded modules
 module list
