@@ -134,11 +134,11 @@ attributes:
     options:
       - [ "Interface: Jupyter Notebook - use Jupyter to select file to work on", ""]
       - [ "Interface: JupyterLab - use JupyterLab to select file to work on", "lab"]
-      - [ "Interface: PyTorch - (uses Singularity ngc-20.12-py3 container) use Jupyter to select file to work on", "pytorch"]
-      - [ "Interface: TensorFlow - (uses Singularity tensorflow-2.5.0-gpu container) use Jupyter to select file to work on", "tensorflow"]
-    <%- templates.each do |a| -%>
-      - [ "<%= a[0] %>", "<%= a[1] %>" ]
-    <%- end -%>
+     # - [ "Interface: PyTorch - (uses Singularity ngc-20.12-py3 container) use Jupyter to select file to work on", "pytorch"]
+     # - [ "Interface: TensorFlow - (uses Singularity tensorflow-2.5.0-gpu container) use Jupyter to select file to work on", "tensorflow"]
+    #<%- templates.each do |a| -%>
+    #  - [ "<%= a[0] %>", "<%= a[1] %>" ]
+    #<%- end -%>
 
 form:
   - modules
