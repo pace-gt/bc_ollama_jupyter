@@ -13,10 +13,10 @@ cd "${HOME}"
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 module purge
+
 export PYTHONPATH=""
 # Load the require modules
 module load <%= context.modules %>
-export PYTHONPATH=$PYTHONROOT/lib/python3.8/site-packages:$PYTHONPATH
 
 # List loaded modules
 module list
@@ -27,4 +27,4 @@ echo "TIMING - Starting jupyter at: $(date)"
 
 # Launch the Jupyter Notebook Server
 set -x
-jupyter notebook --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
+jupyter notebook --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
