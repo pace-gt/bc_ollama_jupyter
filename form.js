@@ -8,9 +8,9 @@ let max_gpus = new Map([
   ["TeslaV100-32GB", 2]
 ])
 
-function set_max_time(queue_name, node_type) {
+function set_max_time(custom_queue, node_type) {
   let max_hours = 21 * 24;  // Max for inferno CPU
-  if (queue_name == "embers") {
+  if (custom_queue == "embers") {
     max_hours = 8;  // Max for embers
   }
   else if (max_gpus.has(node_type) && max_gpus.get(node_type) > 0) {
@@ -22,7 +22,7 @@ function set_max_time(queue_name, node_type) {
   num_hours.attr('max', max_hours);
 }
 
-function set_num_gpus(node_type) {
+function set_max_gpus(node_type) {
   let num_gpus = $('#num_gpus')
   let max_val = max_gpus.has(node_type) ? max_gpus.get(node_type) : 0;
   num_gpus.attr('max', max_val);
@@ -39,38 +39,35 @@ function set_num_gpus(node_type) {
   }
 }
 
-/*
- * Function to handle the change event in the custom_queue select dropdown
- */
-
-function node_type_change_handler(selected_node_type) {
-  let queue_name = $('#custom_queue');
+function node_type_change_handler(selected_custom_queue, selected_node_type) {
+  let custom_queue = selected_custom_queue[0].value;
   let node_type = selected_node_type[0].value;
-  set_max_time(queue_name, node_type);
-  set_num_gpus(node_type);
+  set_max_time(custom_queue, node_type);
+  set_max_gpus(node_type);
 };
 
-function custom_queue_change_handler(selected_custom_queue) {
-  let queue_name = selected_custom_queue[0].value;
-  let node_type = $('#node_type');
-  set_max_time(queue_name, node_type);
+function custom_queue_change_handler(selected_custom_queue, selected_node_type) {
+  let custom_queue = selected_custom_queue[0].value;
+  let node_type = selected_node_type[0].value;
+  set_max_time(custom_queue, node_type);
 };
 
 $(document).ready(function () {
 
   $('select').find('option[value=cpu]').attr('selected', 'selected');
+  $('select').find('option[value=inferno]').attr('selected', 'selected');
 
-  let node_type = $('#batch_connect_session_context_node_type');
+  set_max_gpus("cpu")
+  set_max_time("cpu", "inferno")
+
   let custom_queue = $('#batch_connect_session_context_custom_queue');
-
-  set_num_gpus(node_type)
-  set_max_time(custom_queue, node_type)
+  let node_type = $('#batch_connect_session_context_node_type');
 
   //Handles the change event.
   node_type.change(function () {
-    node_type_change_handler(node_type);
+    node_type_change_handler(custom_queue, node_type);
   })
   custom_queue.change(function () {
-    custom_queue_change_handler(custom_queue);
+    custom_queue_change_handler(custom_queue, node_type);
   })
 });
