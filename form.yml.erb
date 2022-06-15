@@ -1,21 +1,3 @@
-<%-
-  require "csv"
-  cmd = "python /var/opt/mam/bin/mam-accounts.py"
-  begin
-    output, status = Open3.capture2e(cmd)
-    if status.success?
-      accounts = output.split("\n").map(&:strip).reject(&:blank?).sort
-    else
-      raise output
-    end
-  rescue => e
-    accounts = []
-    error = e.message.strip
-  end
-  output= File.read('/storage/coda1/pace-admins/shared/ondemand-jupyter-notebooks/templates.txt')
-  templates = CSV.parse(output)
--%>
----
 title: "Jupyter"
 cluster: "phoenix"
 attributes:
@@ -110,25 +92,7 @@ attributes:
     help: "Maximum: 504h for inferno CPU-only, 72h for inferno GPU, 8h for embers CPU or GPU"
   bc_account:
     label: Charge Account (Required)
-  custom_template:
-    label: "Starting Interface/Template"
-    <%- if error -%>
-
-      <span class="text-danger">Error when parsing templates:</span>
-
-      ```
-      <%= error.gsub("\n", "\n      ") %>
-      ```
-    <%- end -%>
-    widget: select
-    options:
-      - [ "Interface: Jupyter Notebook - use Jupyter to select file to work on", ""]
-      - [ "Interface: JupyterLab - use JupyterLab to select file to work on", "lab"]
-     # - [ "Interface: PyTorch - (uses Singularity ngc-20.12-py3 container) use Jupyter to select file to work on", "pytorch"]
-     # - [ "Interface: TensorFlow - (uses Singularity tensorflow-2.5.0-gpu container) use Jupyter to select file to work on", "tensorflow"]
-    #<%- templates.each do |a| -%>
-    #  - [ "<%= a[0] %>", "<%= a[1] %>" ]
-    #<%- end -%>
+  custom_template: ""
 
 form:
   - modules
