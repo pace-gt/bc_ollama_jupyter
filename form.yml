@@ -4,6 +4,12 @@
 #   hard-coded/user-defined attributes that make up this Batch Connect app.
 ---
 
+# **MUST** set cluster id here that matches cluster configuration file located
+# under /etc/ood/config/clusters.d/*.yml
+# @example Use the Owens cluster at Ohio Supercomputer Center
+#     cluster: "owens"
+cluster: ""
+
 # Define attribute values that aren't meant to be modified by the user within
 # the Dashboard form
 attributes:
@@ -19,7 +25,7 @@ attributes:
   #     modules: "python/3.5"
   # @example Using combination of modules
   #     modules: "python/3.5 cuda/8.0.44"
-  modules: "anaconda3"
+  modules: "python"
 
   # Any extra command line arguments to feed to the `jupyter notebook ...`
   # command that launches the Jupyter notebook within the batch job
@@ -34,12 +40,14 @@ attributes:
 # @note If an attribute listed below is hard-coded above in the `attributes`
 #   option, then it will not appear in the form page that the user sees in the
 #   Dashboard
-  bc_num_slots: 1
-  bc_queue: "testflight-coda"
-  bc_email_on_started: null
+cluster: "hive-slurm"
+attributes:
+  modules: "anaconda3/2022.05"
+  extra_jupyter_args: ""
 form:
   - modules
   - extra_jupyter_args
+  - bc_account
   - bc_queue
   - bc_num_hours
   - bc_num_slots

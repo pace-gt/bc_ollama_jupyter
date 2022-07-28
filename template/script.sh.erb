@@ -14,7 +14,6 @@ cd "${HOME}"
 # Purge the module environment to avoid conflicts
 module purge
 
-export PYTHONPATH=""
 # Load the require modules
 module load <%= context.modules %>
 
@@ -27,5 +26,4 @@ echo "TIMING - Starting jupyter at: $(date)"
 
 # Launch the Jupyter Notebook Server
 set -x
-logger -p user.notice -t "open-ondemand" -- "User: $USER; SubmitHost: $HOSTNAME; JobName: $PBS_JOBNAME; Queue: $PBS_QUEUE; JobID: $PBS_JOBID; Application: <%= context.modules %>"
-jupyter notebook --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
+jupyter notebook --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
