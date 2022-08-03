@@ -1,6 +1,6 @@
 ---
 name: Jupyter Notebook
-category: Slurm Apps
+category: Hive Slurm Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
