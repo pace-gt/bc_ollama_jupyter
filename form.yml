@@ -42,7 +42,13 @@ attributes:
 #   Dashboard
 cluster: "hive-slurm"
 attributes:
-  modules: "anaconda3/2022.05"
+  modules:
+    widget: select
+    label: "Anaconda Module"
+    options:
+      - [ "Anaconda 3 - 2021.05", "anaconda3/2021.05" ]
+      - [ "Anaconda 3 - 2022.05", "anaconda3/2022.05" ]
+      - [ "Anaconda 3 - TensorFlow GPU 2.6.0", "tensorflow-gpu/2.9.1" ]
   extra_jupyter_args: ""
 form:
   - modules
