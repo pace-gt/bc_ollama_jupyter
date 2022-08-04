@@ -18,8 +18,14 @@ batch_connect:
 # Configure the job script submission parameters for the batch job here
 # @see http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
 #
-#script:
-#  queue_name: "queue1"
+script:
+  queue_name: <%= custom_queue %>
+  native: 
+    - "--nodes=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
+    - "--ntasks-per-node=<%= num_cores.blank? ? 1 : num_cores.to_i %>"
+    <%- unless num_mem_per_core.blank? -%>
+    - "--mem-per-cpu=<%= num_mem_per_core.to_i %>G"
+    <%- end -%>
 #  accounting_id: "account1"
 #  email_on_started: true
-#  native: # ... array of command line arguments ...
+

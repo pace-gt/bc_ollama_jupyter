@@ -50,11 +50,63 @@ attributes:
       - [ "Anaconda 3 - 2022.05", "anaconda3/2022.05" ]
       - [ "Anaconda 3 - TensorFlow GPU 2.6.0", "tensorflow-gpu/2.9.1" ]
   extra_jupyter_args: ""
+  custom_queue:
+    id: bc_queue
+    widget: select
+    label: "Queue"
+    cacheable: false
+    options:
+      - [ "hive-gpu","hive-gpu" ]
+      - [ "hive-dev","hive-dev" ]
+      # - [ "hive","hive" ]   # Works sporadically b/c frequently updated for dev
+  bc_num_slots:
+    label: "Nodes"
+    min: 1
+    max: 2
+    step: 1
+    value: 1
+    help: "Max limit currently 2 for dev partitions.  TODO: Set max limit for prod partitions."
+  num_cores:
+    id: num_cores
+    widget: number_field
+    label: "Cores Per Node"
+    cacheable: false
+    min: 1
+    max: 24
+    step: 1
+    value: 1
+    help: 'Number of cores (CPUs) per node.  Max: 24 cores per node.'
+  num_mem_per_core:
+    id: num_mem_per_core
+    widget: number_field
+    label: "Memory Per Core (GB)"
+    cacheable: false
+    min: 1
+    step: 1
+    max: 32
+    value: ""
+    help: "Leave if unsure.\nTotal memory for job is: nodes × cores × memory per core.  Max: 32GB per core."
+  num_gpus:
+    id: num_gpus
+    label: "GPUs Per Node"
+    widget: number_field
+    help: "Number of NVIDIA V100 GPUs per node (hive-gpu and hive-gpu-short only).  Max: 4 GPUs per node."
+    min: 0
+    max: 4 
+    step: 1
+    value: 0
+    cacheable: false
+  bc_num_hours:
+    help: "TODO: Set max vals for prod partitions."
+
 form:
   - modules
   - extra_jupyter_args
   - bc_account
-  - bc_queue
-  - bc_num_hours
+  - custom_queue
   - bc_num_slots
+  - num_cores
+  - num_gpus
+  - num_mem_per_core
+  - bc_num_hours
   - bc_email_on_started
