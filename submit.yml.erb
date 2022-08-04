@@ -26,6 +26,9 @@ script:
     <%- unless num_mem_per_core.blank? -%>
     - "--mem-per-cpu=<%= num_mem_per_core.to_i %>G"
     <%- end -%>
+    <%- if num_gpus.to_i >0 -%>
+    - "--gpus-per-node=<%= num_gpus.to_i %>"
+    <%- end -%>
 #  accounting_id: "account1"
 #  email_on_started: true
 

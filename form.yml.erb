@@ -50,6 +50,9 @@ attributes:
       - [ "Anaconda 3 - 2022.05", "anaconda3/2022.05" ]
       - [ "Anaconda 3 - TensorFlow GPU 2.6.0", "tensorflow-gpu/2.9.1" ]
   extra_jupyter_args: ""
+  bc_account:
+    label: "Tracking Account"
+    help: "Required.  Has the format: `p-<PI username>`"
   custom_queue:
     id: bc_queue
     widget: select
@@ -85,12 +88,11 @@ attributes:
     step: 1
     max: 32
     value: ""
-    help: "Leave if unsure.\nTotal memory for job is: nodes × cores × memory per core.  Max: 32GB per core."
+    help: "Leave blank if unsure.\nTotal memory for job is: nodes × cores × memory per core.  Max: 32GB per core."
   num_gpus:
     id: num_gpus
     label: "GPUs Per Node"
     widget: number_field
-    help: "Number of NVIDIA V100 GPUs per node (hive-gpu and hive-gpu-short only).  Max: 4 GPUs per node."
     min: 0
     max: 4 
     step: 1
