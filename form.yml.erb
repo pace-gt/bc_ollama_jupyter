@@ -48,6 +48,7 @@ attributes:
     options:
       - [ "Anaconda 3 - 2021.05", "anaconda3/2021.05" ]
       - [ "Anaconda 3 - 2022.05", "anaconda3/2022.05" ]
+      - [ "Anaconda 3 - PyTorch 1.12", "pytorch/1.12.0" ]
       - [ "Anaconda 3 - TensorFlow GPU 2.6.0", "tensorflow-gpu/2.9.1" ]
   extra_jupyter_args: ""
   bc_account:
@@ -56,7 +57,7 @@ attributes:
   custom_queue:
     id: bc_queue
     widget: select
-    label: "Queue"
+    label: "Partition"
     cacheable: false
     options:
       - [ "hive-gpu","hive-gpu" ]
@@ -73,7 +74,6 @@ attributes:
     id: num_cores
     widget: number_field
     label: "Cores Per Node"
-    cacheable: false
     min: 1
     max: 24
     step: 1
@@ -83,7 +83,6 @@ attributes:
     id: num_mem_per_core
     widget: number_field
     label: "Memory Per Core (GB)"
-    cacheable: false
     min: 1
     step: 1
     max: 32
@@ -97,7 +96,6 @@ attributes:
     max: 4 
     step: 1
     value: 0
-    cacheable: false
   bc_num_hours:
     help: "TODO: Set max vals for prod partitions."
 
