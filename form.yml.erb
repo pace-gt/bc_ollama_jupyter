@@ -65,18 +65,16 @@ attributes:
       - [ "hive-dev","hive-dev" ]
   bc_num_slots:
     label: "Nodes"
+    # Max and val will get properly initialized in form.js
     min: 1
     step: 1
-    value: 1
-    # Max will get properly initialized in form.js
   num_cores:
     id: num_cores
     widget: number_field
     label: "Cores Per Node"
+    # Max and val will get properly initialized in form.js
     min: 1
     step: 1
-    value: 1
-    # Max will get properly initialized in form.js
     help: 'Number of cores (CPUs) per node.  Max: 24 cores per node.'
   num_mem_per_core:
     id: num_mem_per_core
@@ -91,10 +89,8 @@ attributes:
     id: num_gpus
     label: "GPUs Per Node"
     widget: number_field
+    # Min, max, and val will get initialized properly in form.js
     step: 1
-    # Min, max, and value will get initialized properly in form.js
-  bc_num_hours:
-    help: "TODO: Set max vals for prod partitions."
 
 form:
   - modules

@@ -21,9 +21,9 @@ let max_nodes = new Map([
 
 // Can be queried with `sinfo -o "%P %l"
 let max_walltimes = new Map([
-    ["hive", 60],
-    ["hive-gpu", 60],
-    ["hive-dev", 60]
+    ["hive", 1],
+    ["hive-gpu", 1],
+    ["hive-dev", 1]
 ])
 
 // Can be queried with `sinfo -o "%P %c"
@@ -78,7 +78,7 @@ function _update_nodes_inputs(selected_custom_queue) {
     let num_nodes = $('#batch_connect_session_context_bc_num_slots')
 
     console.log("Queue name:", queue_name)
-    console.log("> Num_nodes:", num_nodes.val())
+    console.log("> Num nodes:", num_nodes.val())
 
     if (max_nodes.has(queue_name)) {
         let nmax = max_nodes.get(queue_name)
@@ -88,10 +88,26 @@ function _update_nodes_inputs(selected_custom_queue) {
     }
 }
 
+function _update_walltime_inputs(selected_custom_queue) {
+    let queue_name = selected_custom_queue[0].value
+    let num_hours = $('#batch_connect_session_context_bc_num_hours')
+
+    console.log("Queue name:", queue_name)
+    console.log("> Num hours:", num_hours.val())
+
+    if (max_walltimes.has(queue_name)) {
+        let wmax = max_walltimes.get(queue_name)
+        console.log("> Max hours: ", wmax)
+        num_hours.attr('max', wmax)
+        num_hours.val(Math.min(Math.max(num_hours.val(), 1), wmax))
+    }
+}
+
 function custom_queue_change_handler(selected_custom_queue) {
     _update_gpu_inputs(selected_custom_queue)
     _update_cores_inputs(selected_custom_queue)
     _update_nodes_inputs(selected_custom_queue)
+    _update_walltime_inputs(selected_custom_queue)
 }
 
 $(document).ready(function () {
