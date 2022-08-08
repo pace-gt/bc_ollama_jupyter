@@ -1,7 +1,7 @@
 ---
 name: Jupyter Notebook
 category: Hive Slurm Interactive Apps
-subcategory: Servers
+subcategory: Compute Node Jobs
 role: batch_connect
 description: |
   This app will launch a Jupyter Notebook server on one or more nodes.

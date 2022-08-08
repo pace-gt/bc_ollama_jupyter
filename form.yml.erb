@@ -48,21 +48,26 @@ attributes:
     options:
       - [ "Anaconda 3 - 2021.05", "anaconda3/2021.05" ]
       - [ "Anaconda 3 - 2022.05", "anaconda3/2022.05" ]
-      - [ "Anaconda 3 - PyTorch 1.12", "pytorch/1.12.0" ]
-      - [ "Anaconda 3 - TensorFlow GPU 2.6.0", "tensorflow-gpu/2.9.1" ]
+      - [ "Anaconda 3 - TensorFlow GPU 2.9.0", "tensorflow-gpu/2.9.0" ]
+      # TODO: Need to rebuild PyTorch with Jupyter in its env
+      # - [ "Anaconda 3 - PyTorch 1.12", "pytorch/1.12.0" ] 
   extra_jupyter_args: ""
   bc_account:
     label: "Tracking Account"
     help: "Required.  Has the format: `p-<PI username>`"
+    required: true
   custom_queue:
     id: bc_queue
     widget: select
     label: "Partition"
-    cacheable: false
     options:
-      - [ "hive","hive" ]
-      - [ "hive-gpu","hive-gpu" ]
-      - [ "hive-dev","hive-dev" ]
+      - ["hive", "hive"]
+      - ["hive-all", "hive-all"]
+      - ["hive-sas", "hive-sas"]
+      - ["hive-nvme-sas", "hive-nvme-sas"]
+      - ["hive-interact", "hive-interact"]
+      - ["hive-gpu", "hive-gpu"]
+      - ["hive-gpu-short", "hive-gpu-short"]
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js
@@ -82,7 +87,6 @@ attributes:
     label: "Memory Per Core (GB)"
     min: 1
     step: 1
-    max: 32
     value: ""
     help: "Leave blank if unsure.\nTotal memory for job is: nodes × cores × memory per core.  Max: 32GB per core."
   num_gpus:
