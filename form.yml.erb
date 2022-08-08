@@ -60,9 +60,9 @@ attributes:
     label: "Partition"
     cacheable: false
     options:
+      - [ "hive","hive" ]
       - [ "hive-gpu","hive-gpu" ]
       - [ "hive-dev","hive-dev" ]
-      # - [ "hive","hive" ]   # Works sporadically b/c frequently updated for dev
   bc_num_slots:
     label: "Nodes"
     min: 1
@@ -92,10 +92,8 @@ attributes:
     id: num_gpus
     label: "GPUs Per Node"
     widget: number_field
-    min: 0
-    max: 4 
     step: 1
-    value: 0
+    # Min, max, and value will get initialized properly in form.js
   bc_num_hours:
     help: "TODO: Set max vals for prod partitions."
 
