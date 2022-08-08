@@ -27,7 +27,7 @@ let max_walltimes = new Map([
 ])
 
 // Can be queried with `sinfo -o "%P %c"
-let max_cpus = new Map([
+let max_cores = new Map([
     ["hive", 4],
     ["hive-gpu", 24],
     ["hive-dev", 24]
@@ -59,8 +59,23 @@ function _update_gpu_inputs(selected_custom_queue) {
     }
 }
 
+function _update_cores_inputs(selected_custom_queue) {
+    let queue_name = selected_custom_queue[0].value
+    let num_cores = $('#num_cores')
+
+    console.log("Queue name:", queue_name)
+
+    if (max_cores.has(queue_name)) {
+        let cmax = max_cores.get(queue_name)
+        console.log("> Max cores: ", cmax)
+        num_cores.attr('max', cmax)
+        num_cores.val(Math.min(Math.max(num_cores.val(), 1), cmax))
+    }
+}
+
 function custom_queue_change_handler(selected_custom_queue) {
     _update_gpu_inputs(selected_custom_queue)
+    _update_cores_inputs(selected_custom_queue)
 }
 
 $(document).ready(function () {

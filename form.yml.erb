@@ -75,9 +75,9 @@ attributes:
     widget: number_field
     label: "Cores Per Node"
     min: 1
-    max: 24
     step: 1
     value: 1
+    # Max will get properly initialized in form.js
     help: 'Number of cores (CPUs) per node.  Max: 24 cores per node.'
   num_mem_per_core:
     id: num_mem_per_core
