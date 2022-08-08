@@ -1,5 +1,5 @@
 ---
-name: Jupyter Notebook
+name: Jupyter 
 category: Hive Slurm Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
