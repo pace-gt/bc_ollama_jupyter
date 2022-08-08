@@ -73,9 +73,25 @@ function _update_cores_inputs(selected_custom_queue) {
     }
 }
 
+function _update_nodes_inputs(selected_custom_queue) {
+    let queue_name = selected_custom_queue[0].value
+    let num_nodes = $('#batch_connect_session_context_bc_num_slots')
+
+    console.log("Queue name:", queue_name)
+    console.log("> Num_nodes:", num_nodes.val())
+
+    if (max_nodes.has(queue_name)) {
+        let nmax = max_nodes.get(queue_name)
+        console.log("> Max nodes: ", nmax)
+        num_nodes.attr('max', nmax)
+        num_nodes.val(Math.min(Math.max(num_nodes.val(), 1), nmax))
+    }
+}
+
 function custom_queue_change_handler(selected_custom_queue) {
     _update_gpu_inputs(selected_custom_queue)
     _update_cores_inputs(selected_custom_queue)
+    _update_nodes_inputs(selected_custom_queue)
 }
 
 $(document).ready(function () {

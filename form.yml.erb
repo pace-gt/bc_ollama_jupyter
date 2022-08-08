@@ -66,10 +66,9 @@ attributes:
   bc_num_slots:
     label: "Nodes"
     min: 1
-    max: 2
     step: 1
     value: 1
-    help: "Max limit currently 2 for dev partitions.  TODO: Set max limit for prod partitions."
+    # Max will get properly initialized in form.js
   num_cores:
     id: num_cores
     widget: number_field
