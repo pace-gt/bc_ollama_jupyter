@@ -27,4 +27,5 @@ echo "TIMING - Starting jupyter at: $(date)"
 
 # Launch the Jupyter Notebook Server
 set -x
+logger -p user.notice -t "ondemand" -- "User: $USER; SubmitHost: $HOSTNAME; JobName: $SLURM_JOB_NAME; Queue: $SLURM_JOB_PARTITION; JobID: $SLURM_JOB_ID"
 jupyter notebook --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
