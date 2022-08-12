@@ -54,7 +54,7 @@ attributes:
   extra_jupyter_args: ""
   bc_account:
     label: "Tracking Account"
-    help: "Required.  Has the format: `p-<PI username>`"
+    help: "Required.  Has the format: `hive-<PI username>`"
     required: true
   custom_queue:
     id: bc_queue
@@ -63,6 +63,8 @@ attributes:
     options:
       - ["hive", "hive"]
       - ["hive-all", "hive-all"]
+      - ["hive-himem", "hive-himem"]
+      - ["hive-nvme", "hive-nvme"]
       - ["hive-sas", "hive-sas"]
       - ["hive-nvme-sas", "hive-nvme-sas"]
       - ["hive-interact", "hive-interact"]
@@ -86,6 +88,7 @@ attributes:
     widget: number_field
     label: "Memory Per Core (GB)"
     min: 1
+    max: 32
     step: 1
     value: ""
     help: "Leave blank if unsure.\nTotal memory for job is: nodes × cores × memory per core.  Max: 32GB per core."
