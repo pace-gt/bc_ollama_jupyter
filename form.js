@@ -2,6 +2,8 @@
 let max_gpus = new Map([
     ["hive", 0],
     ["hive-all", 4],
+    ["hive-himem", 0],
+    ["hive-nvme", 0],
     ["hive-sas", 0],
     ["hive-nvme-sas", 0],
     ["hive-interact", 0],
@@ -18,19 +20,23 @@ let max_gpus = new Map([
 
 // Can be queried with `sinfo -o "%P %D"`
 let max_nodes = new Map([
-    ["hive", 4],
-    ["hive-all", 6],
-    ["hive-sas", 1],
-    ["hive-nvme-sas", 1],
-    ["hive-interact", 4],
-    ["hive-gpu", 1],
-    ["hive-gpu-short", 1],
+    ["hive", 87],
+    ["hive-all", 100],
+    ["hive-himem", 1],
+    ["hive-nvme", 4],
+    ["hive-sas", 4],
+    ["hive-nvme-sas", 8],
+    ["hive-interact", 87],
+    ["hive-gpu", 4],
+    ["hive-gpu-short", 4],
 ])
 
 // Can be queried with `sinfo -o "%P %l"
 let max_walltimes = new Map([
     ["hive", 120],
     ["hive-all", 120],
+    ["hive-himem", 120],
+    ["hive-nvme", 720],
     ["hive-sas", 720],
     ["hive-nvme-sas", 720],
     ["hive-interact", 1],
@@ -42,6 +48,8 @@ let max_walltimes = new Map([
 let max_cores = new Map([
     ["hive", 24],
     ["hive-all", 24],
+    ["hive-himem", 24],
+    ["hive-nvme", 24],
     ["hive-sas", 24],
     ["hive-nvme-sas", 24],
     ["hive-interact", 24],
@@ -54,6 +62,8 @@ let max_cores = new Map([
 let max_node_mem = new Map([
     ["hive", 191],
     ["hive-all", 191],
+    ["hive-himem", 3094],
+    ["hive-nvme", 191],
     ["hive-sas", 191],
     ["hive-nvme-sas", 191],
     ["hive-interact", 191],
