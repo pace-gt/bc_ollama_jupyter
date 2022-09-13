@@ -20,15 +20,15 @@ let max_gpus = new Map([
 
 // Can be queried with `sinfo -o "%P %D"`
 let max_nodes = new Map([
-    ["hive", 267],
-    ["hive-all", 300],
-    ["hive-himem", 3],
-    ["hive-nvme", 10],
-    ["hive-sas", 10],
-    ["hive-nvme-sas", 20],
-    ["hive-interact", 267],
-    ["hive-gpu", 10],
-    ["hive-gpu-short", 10],
+    ["hive", 87],
+    ["hive-all", 100],
+    ["hive-himem", 1],
+    ["hive-nvme", 4],
+    ["hive-sas", 4],
+    ["hive-nvme-sas", 8],
+    ["hive-interact", 87],
+    ["hive-gpu", 4],
+    ["hive-gpu-short", 4],
 ])
 
 // Can be queried with `sinfo -o "%P %l"
