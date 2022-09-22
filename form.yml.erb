@@ -40,7 +40,7 @@ attributes:
 # @note If an attribute listed below is hard-coded above in the `attributes`
 #   option, then it will not appear in the form page that the user sees in the
 #   Dashboard
-cluster: "hive-slurm"
+cluster: "phx-dev-slurm"
 attributes:
   modules:
     widget: select
@@ -52,22 +52,18 @@ attributes:
       - [ "Anaconda 3 - PyTorch 1.12", "pytorch/1.12.0" ] 
   extra_jupyter_args: ""
   bc_account:
-    label: "Tracking Account"
-    help: "Required.  Has the format: `hive-<PI username>`"
+    label: "Charge Account"
+    help: "Required.  Has the format: `p-<PI username>`"
     required: true
   custom_queue:
     id: bc_queue
     widget: select
     label: "Partition"
     options:
-      - ["hive", "hive"]
-      - ["hive-himem", "hive-himem"]
-      - ["hive-nvme", "hive-nvme"]
-      - ["hive-sas", "hive-sas"]
-      - ["hive-nvme-sas", "hive-nvme-sas"]
-      - ["hive-interact", "hive-interact"]
-      - ["hive-gpu", "hive-gpu"]
-      - ["hive-gpu-short", "hive-gpu-short"]
+      - ["cpu-small", "cpu-small"]
+      - ["gpu-v100", "gpu-v100"]
+      - ["cpu-small-X", "cpu-small-X"]
+      - ["gpu-v100-X", "gpu-v100-X"]
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js

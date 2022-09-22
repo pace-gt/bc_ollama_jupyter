@@ -1,81 +1,109 @@
-// Can be queried with `sinfo -o "%P %G %f"`
-let max_gpus = new Map([
-    ["hive", 0],
-    ["hive-all", 4],
-    ["hive-himem", 0],
-    ["hive-nvme", 0],
-    ["hive-sas", 0],
-    ["hive-nvme-sas", 0],
-    ["hive-interact", 0],
-    ["hive-gpu", 4],
-    ["hive-gpu-short", 4],
-])
+// Can retrieve these using get_resource_limits.py script
 
-// Can be queried with `sinfo -o "%P %G %f"`
-//let gpu_types = new Map([
-//    ["hive", []],
-//    ["hive-gpu", ["First available", "V100", "A100"]],
-//    ["hive-dev", ["V100"]]
-//])
-
-// Can be queried with `sinfo -o "%P %D"`
 let max_nodes = new Map([
-    ["hive", 267],
-    ["hive-all", 300],
-    ["hive-himem", 3],
-    ["hive-nvme", 10],
-    ["hive-sas", 10],
-    ["hive-nvme-sas", 20],
-    ["hive-interact", 267],
-    ["hive-gpu", 10],
-    ["hive-gpu-short", 10],
+    ['cpu-small', 2],
+    ['cpu-medium', 0],
+    ['cpu-large', 0],
+    ['cpu-sas', 0],
+    ['cpu-amd', 0],
+    ['gpu-v100', 1],
+    ['gpu-a100', 0],
+    ['gpu-rtx6000', 0],
+    ['cpu-pmem', 0],
+    ['cpu-small-X', 2],
+    ['cpu-medium-X', 0],
+    ['cpu-large-X', 0],
+    ['cpu-sas-X', 0],
+    ['cpu-amd-X', 0],
+    ['gpu-v100-X', 1],
+    ['gpu-a100-X', 0],
+    ['gpu-rtx6000-X', 0],
+    ['cpu-pmem-X', 0],
 ])
 
-// Can be queried with `sinfo -o "%P %l"
 let max_walltimes = new Map([
-    ["hive", 120],
-    ["hive-all", 120],
-    ["hive-himem", 120],
-    ["hive-nvme", 720],
-    ["hive-sas", 720],
-    ["hive-nvme-sas", 720],
-    ["hive-interact", 1],
-    ["hive-gpu", 72],
-    ["hive-gpu-short", 12],
+    ['cpu-small', 504],
+    ['cpu-medium', 504],
+    ['cpu-large', 504],
+    ['cpu-sas', 504],
+    ['cpu-amd', 504],
+    ['gpu-v100', 72],
+    ['gpu-a100', 72],
+    ['gpu-rtx6000', 72],
+    ['cpu-pmem', 504],
+    ['cpu-small-X', 504],
+    ['cpu-medium-X', 504],
+    ['cpu-large-X', 504],
+    ['cpu-sas-X', 504],
+    ['cpu-amd-X', 504],
+    ['gpu-v100-X', 72],
+    ['gpu-a100-X', 72],
+    ['gpu-rtx6000-X', 72],
+    ['cpu-pmem-X', 504],
 ])
 
-// Can be queried with `sinfo -o "%P %c"
 let max_cores = new Map([
-    ["hive", 24],
-    ["hive-all", 24],
-    ["hive-himem", 24],
-    ["hive-nvme", 24],
-    ["hive-sas", 24],
-    ["hive-nvme-sas", 24],
-    ["hive-interact", 24],
-    ["hive-gpu", 24],
-    ["hive-gpu-short", 24],
+    ['cpu-small', 24],
+    ['cpu-medium', 0],
+    ['cpu-large', 0],
+    ['cpu-sas', 0],
+    ['cpu-amd', 0],
+    ['gpu-v100', 24],
+    ['gpu-a100', 0],
+    ['gpu-rtx6000', 0],
+    ['cpu-pmem', 0],
+    ['cpu-small-X', 24],
+    ['cpu-medium-X', 0],
+    ['cpu-large-X', 0],
+    ['cpu-sas-X', 0],
+    ['cpu-amd-X', 0],
+    ['gpu-v100-X', 24],
+    ['gpu-a100-X', 0],
+    ['gpu-rtx6000-X', 0],
+    ['cpu-pmem-X', 0],
 ])
 
-// Can be queried with `sinfo -o "%P %m"
-// Units are GB
 let max_node_mem = new Map([
-    ["hive", 191],
-    ["hive-all", 191],
-    ["hive-himem", 3094],
-    ["hive-nvme", 191],
-    ["hive-sas", 191],
-    ["hive-nvme-sas", 191],
-    ["hive-interact", 191],
-    ["hive-gpu", 385],
-    ["hive-gpu-short", 385],
+    ['cpu-small', 191],
+    ['cpu-medium', 0],
+    ['cpu-large', 0],
+    ['cpu-sas', 0],
+    ['cpu-amd', 0],
+    ['gpu-v100', 385],
+    ['gpu-a100', 0],
+    ['gpu-rtx6000', 0],
+    ['cpu-pmem', 0],
+    ['cpu-small-X', 191],
+    ['cpu-medium-X', 0],
+    ['cpu-large-X', 0],
+    ['cpu-sas-X', 0],
+    ['cpu-amd-X', 0],
+    ['gpu-v100-X', 385],
+    ['gpu-a100-X', 0],
+    ['gpu-rtx6000-X', 0],
+    ['cpu-pmem-X', 0],
 ])
 
-// Can be found in /var/lib/slurm/slurmd/conf-cache/nodes.conf
-// Units are GB
-// Rounded up from 8192 MB in nodes.conf because it's unclear if 
-// nodes.conf uses MiB or MB
-let mem_spec_limit = 9
+let max_gpus = new Map([
+    ['cpu-small', 0],
+    ['cpu-medium', 0],
+    ['cpu-large', 0],
+    ['cpu-sas', 0],
+    ['cpu-amd', 0],
+    ['gpu-v100', 2],
+    ['gpu-a100', 0],
+    ['gpu-rtx6000', 0],
+    ['cpu-pmem', 0],
+    ['cpu-small-X', 0],
+    ['cpu-medium-X', 0],
+    ['cpu-large-X', 0],
+    ['cpu-sas-X', 0],
+    ['cpu-amd-X', 0],
+    ['gpu-v100-X', 2],
+    ['gpu-a100-X', 0],
+    ['gpu-rtx6000-X', 0],
+    ['cpu-pmem-X', 0],
+])
 
 function _update_gpu_inputs(selected_custom_queue) {
     let queue_name = selected_custom_queue[0].value
@@ -165,8 +193,3 @@ $(document).ready(function () {
     //Handles the change events
     custom_queue.change(function () { custom_queue_change_handler(custom_queue) })
   })
-  
-
-
-
-

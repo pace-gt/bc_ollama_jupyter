@@ -1,6 +1,6 @@
 ---
 name: Jupyter 
-category: Hive Slurm Interactive Apps
+category: Phoenix Slurm Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |
