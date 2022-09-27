@@ -55,15 +55,19 @@ attributes:
     label: "Charge Account"
     help: "Required.  Has the format: `p-<PI username>`"
     required: true
-  custom_queue:
-    id: bc_queue
+  qos:
     widget: select
-    label: "Partition"
+    label: "Quality of Service"
     options:
-      - ["cpu-small", "cpu-small"]
-      - ["gpu-v100", "gpu-v100"]
-      - ["cpu-small-X", "cpu-small-X"]
-      - ["gpu-v100-X", "gpu-v100-X"]
+      - ["embers"]
+      - ["inferno"]
+  node_type:
+    id: node_type
+    label: "Node Type"
+    widget: select
+    options:
+      - ["CPU Only", "cpu"]
+      - ["GPU TeslaV100-16GB", "V100-16GB"]
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js
@@ -97,7 +101,8 @@ form:
   - modules
   - extra_jupyter_args
   - bc_account
-  - custom_queue
+  - qos
+  - node_type
   - bc_num_slots
   - num_cores
   - num_gpus

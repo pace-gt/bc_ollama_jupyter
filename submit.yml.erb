@@ -19,7 +19,7 @@ batch_connect:
 # @see http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
 #
 script:
-  queue_name: <%= custom_queue %>
+  qos: <%= qos %>
   native: 
     - "--nodes=<%= bc_num_slots.blank? ? 1 : bc_num_slots.to_i %>"
     - "--ntasks-per-node=<%= num_cores.blank? ? 1 : num_cores.to_i %>"
