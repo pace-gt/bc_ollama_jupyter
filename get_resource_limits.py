@@ -26,7 +26,8 @@ excluded_parts = {
 # Maps a node type to the actual feature
 ntype_to_feat = {
     "cpu": "cpu-small",
-    "V100-16GB": "V100-16GB"
+    "V100-16GB": "V100-16GB",
+    "V100-32GB": "V100-32GB"
 }
 
 # Read data table from sinfo

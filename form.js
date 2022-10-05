@@ -5,28 +5,32 @@
 let max_nodes = new Map([
     ['cpu', 2],
     ['V100-16GB', 1],
+    ['V100-32GB', 1],
 ])
 
 let max_walltimes = new Map([
     ['cpu', 504],
     ['V100-16GB', 72],
+    ['V100-32GB', 72],
 ])
 
 let max_cores = new Map([
     ['cpu', 24],
     ['V100-16GB', 24],
+    ['V100-32GB', 24],
 ])
 
 let max_node_mem = new Map([
     ['cpu', 191],
     ['V100-16GB', 385],
+    ['V100-32GB', 191],
 ])
 
 let max_gpus = new Map([
     ['cpu', 0],
     ['V100-16GB', 2],
+    ['V100-32GB', 2],
 ])
-
 
 
 function _update_gpu_inputs(selected_node_type) {
