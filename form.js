@@ -86,34 +86,48 @@ function _update_nodes_inputs(selected_node_type) {
     }
 }
 
-function _update_walltime_inputs(selected_node_type) {
+function _update_walltime_inputs(selected_node_type, selected_qos_type) {
     let node_type = selected_node_type[0].value
+    let qos = selected_qos_type[0].value
     let num_hours = $('#batch_connect_session_context_bc_num_hours')
-
-    //console.log("Queue name:", queue_name)
+    //console.log("QOS:", qos)
     //console.log("> Num hours:", num_hours.val())
 
-    if (max_walltimes.has(node_type)) {
-        let wmax = max_walltimes.get(node_type)
+    let wmax = 0
+    if (qos == "embers") {
+        wmax = 8
+    }
+    else if (max_walltimes.has(node_type)) {
+        wmax = max_walltimes.get(node_type)
+    }
+
+    if (wmax > 0) {
         //console.log("> Max hours: ", wmax)
         num_hours.attr('max', wmax)
         num_hours.val(Math.min(Math.max(num_hours.val(), 1), wmax))
     }
 }
 
-function node_type_change_handler(selected_node_type) {
+function node_type_change_handler(selected_node_type, selected_qos_type) {
     _update_gpu_inputs(selected_node_type)
     _update_cores_inputs(selected_node_type)
     _update_nodes_inputs(selected_node_type)
-    _update_walltime_inputs(selected_node_type)
+    _update_walltime_inputs(selected_node_type, selected_qos_type)
+}
+
+function qos_change_handler(selected_node_type, selected_qos_type) {
+    _update_walltime_inputs(selected_node_type, selected_qos_type)
 }
 
 $(document).ready(function () {
     let node_type = $('#batch_connect_session_context_node_type')
+    let qos = $('#batch_connect_session_context_qos')
   
     // Initialize everything on page load
-   node_type_change_handler(node_type)
+   node_type_change_handler(node_type, qos)
+   qos_change_handler(node_type, qos)
   
     //Handles the change events
-    node_type.change(function () { node_type_change_handler(node_type) })
+    node_type.change(function () { node_type_change_handler(node_type, qos) })
+    qos.change(function () { qos_change_handler(node_type, qos) })
   })
