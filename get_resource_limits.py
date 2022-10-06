@@ -11,27 +11,6 @@ from typing import NamedTuple
 # Output to this JavaScript header file
 js_output_file="resource_limits.js"
 
-# Don't get limits for these partitions
-excluded_parts = {
-    "phoenix-all",
-    "cpu-medium-X",
-    "cpu-large-X",
-    "cpu-sas-X",
-    "cpu-amd-X",
-    "gpu-v100-X",
-    "gpu-a100-X",
-    "gpu-rtx6000-X",
-    "cpu-pmem-X"
-}
-
-# Maps a node type to the actual feature
-ntype_to_feat = {
-    "cpu": "cpu-small",
-    "V100-16GB": "V100-16GB",
-    "V100-32GB": "V100-32GB"
-}
-
-
 class NodeTypeInfo(NamedTuple):
     node_type: str
     part_name: str
@@ -39,7 +18,7 @@ class NodeTypeInfo(NamedTuple):
 
 node_types = [
     NodeTypeInfo(node_type="cpu", part_name="cpu-small"),
-    NodeTypeInfo(node_type="cpusas", part_name="cpu-sas"),
+    NodeTypeInfo(node_type="localSAS", part_name="cpu-sas"),
     NodeTypeInfo(node_type="V100-16GB", part_name="gpu-v100", inc_feat={"V100-16GB"}),
     NodeTypeInfo(node_type="V100-32GB", part_name="gpu-v100", inc_feat={"V100-32GB"}),
     NodeTypeInfo(node_type="RTX6000", part_name="gpu-rtx6000")
