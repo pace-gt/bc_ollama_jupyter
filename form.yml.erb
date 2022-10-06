@@ -40,7 +40,7 @@ attributes:
 # @note If an attribute listed below is hard-coded above in the `attributes`
 #   option, then it will not appear in the form page that the user sees in the
 #   Dashboard
-cluster: "phx-dev-slurm"
+cluster: "phoenix-slurm"
 attributes:
   modules:
     widget: select
@@ -69,8 +69,10 @@ attributes:
     widget: select
     options:
       - ["CPU Only", "cpu"]
-      - ["GPU TeslaV100-16GB", "V100-16GB"]
-      - ["GPU TeslaV100-32GB", "V100-32GB"]
+      - ["CPU with Local SAS", "localSAS"]
+      - ["GPU Tesla RTX 6000", "RTX6000"]
+      - ["GPU Tesla V100-16GB", "V100-16GB"]
+      - ["GPU Tesla V100-32GB", "V100-32GB"]
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js
