@@ -2,11 +2,11 @@
 
 // Can retrieve these using get_resource_limits.py script
 let max_nodes = new Map([
-    ['cpu', 468],
-    ['localSAS', 27],
-    ['V100-16GB', 9],
-    ['V100-32GB', 8],
-    ['RTX6000', 13],
+    ['cpu', 760],
+    ['localSAS', 50],
+    ['V100-16GB', 20],
+    ['V100-32GB', 9],
+    ['RTX6000', 21],
 ])
 
 let max_walltimes = new Map([
