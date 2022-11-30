@@ -2,11 +2,13 @@
 
 // Can retrieve these using get_resource_limits.py script
 let max_nodes = new Map([
-    ['cpu', 760],
-    ['localSAS', 50],
-    ['V100-16GB', 20],
+    ['cpu', 948],
+    ['localSAS', 62],
+    ['V100-16GB', 28],
     ['V100-32GB', 9],
-    ['RTX6000', 21],
+    ['RTX6000', 26],
+    ['A100-40GB', 5],
+    ['cpu-amd', 4],
 ])
 
 let max_walltimes = new Map([
@@ -15,6 +17,8 @@ let max_walltimes = new Map([
     ['V100-16GB', 72],
     ['V100-32GB', 72],
     ['RTX6000', 72],
+    ['A100-40GB', 72],
+    ['cpu-amd', 504],
 ])
 
 let max_cores = new Map([
@@ -23,14 +27,18 @@ let max_cores = new Map([
     ['V100-16GB', 24],
     ['V100-32GB', 24],
     ['RTX6000', 24],
+    ['A100-40GB', 64],
+    ['cpu-amd', 128],
 ])
 
 let max_node_mem = new Map([
     ['cpu', 191],
     ['localSAS', 385],
-    ['V100-16GB', 385],
+    ['V100-16GB', 191],
     ['V100-32GB', 191],
     ['RTX6000', 385],
+    ['A100-40GB', 515],
+    ['cpu-amd', 515],
 ])
 
 let max_gpus = new Map([
@@ -39,6 +47,8 @@ let max_gpus = new Map([
     ['V100-16GB', 2],
     ['V100-32GB', 2],
     ['RTX6000', 4],
+    ['A100-40GB', 2],
+    ['cpu-amd', 0],
 ])
 
 

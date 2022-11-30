@@ -21,7 +21,9 @@ node_types = [
     NodeTypeInfo(node_type="localSAS", part_name="cpu-sas"),
     NodeTypeInfo(node_type="V100-16GB", part_name="gpu-v100", inc_feat={"V100-16GB"}),
     NodeTypeInfo(node_type="V100-32GB", part_name="gpu-v100", inc_feat={"V100-32GB"}),
-    NodeTypeInfo(node_type="RTX6000", part_name="gpu-rtx6000")
+    NodeTypeInfo(node_type="RTX6000", part_name="gpu-rtx6000"),
+    NodeTypeInfo(node_type="A100-40GB", part_name="gpu-a100"),
+    NodeTypeInfo(node_type="cpu-amd", part_name="cpu-amd", inc_feat={"cpu-amd"})
 ]
 
 # Key is variable name for a resource limit ('max_nodes', etc).  
