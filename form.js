@@ -2,11 +2,11 @@
 
 // Can retrieve these using get_resource_limits.py script
 let max_nodes = new Map([
-    ['cpu', 948],
-    ['localSAS', 62],
-    ['V100-16GB', 28],
-    ['V100-32GB', 9],
-    ['RTX6000', 26],
+    ['cpu', 1040],
+    ['localSAS', 67],
+    ['V100-16GB', 32],
+    ['V100-32GB', 10],
+    ['RTX6000', 29],
     ['A100-40GB', 5],
     ['cpu-amd', 4],
 ])
