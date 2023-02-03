@@ -1,6 +1,6 @@
 ---
 name: Jupyter 
-category: Slurm Interactive Apps
+category: Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |
