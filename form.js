@@ -2,55 +2,34 @@
 
 // Can retrieve these using get_resource_limits.py script
 let max_nodes = new Map([
-    ['cpu', 1231],
-    ['localSAS', 79],
-    ['V100-16GB', 39],
-    ['V100-32GB', 14],
-    ['RTX6000', 37],
-    ['A100-40GB', 5],
-    ['cpu-amd', 4],
+    ['first', 2],
+    ['RTX_6000', 2],
+    ['A40', 2],
 ])
 
 let max_walltimes = new Map([
-    ['cpu', 504],
-    ['localSAS', 504],
-    ['V100-16GB', 72],
-    ['V100-32GB', 72],
-    ['RTX6000', 72],
-    ['A100-40GB', 72],
-    ['cpu-amd', 504],
+    ['first', 2],
+    ['RTX_6000', 2],
+    ['A40', 2],
 ])
 
 let max_cores = new Map([
-    ['cpu', 24],
-    ['localSAS', 24],
-    ['V100-16GB', 24],
-    ['V100-32GB', 24],
-    ['RTX6000', 24],
-    ['A100-40GB', 64],
-    ['cpu-amd', 128],
+    ['first', 4],
+    ['RTX_6000', 4],
+    ['A40', 4],
 ])
 
 let max_node_mem = new Map([
-    ['cpu', 191],
-    ['localSAS', 385],
-    ['V100-16GB', 191],
-    ['V100-32GB', 191],
-    ['RTX6000', 385],
-    ['A100-40GB', 515],
-    ['cpu-amd', 515],
+    ['first', 4],
+    ['RTX_6000', 4],
+    ['A40', 4],
 ])
 
 let max_gpus = new Map([
-    ['cpu', 0],
-    ['localSAS', 0],
-    ['V100-16GB', 2],
-    ['V100-32GB', 2],
-    ['RTX6000', 4],
-    ['A100-40GB', 2],
-    ['cpu-amd', 0],
+    ['first', 0],
+    ['RTX_6000', 4],
+    ['A40', 2],
 ])
-
 
 
 function _update_gpu_inputs(selected_node_type) {

@@ -40,7 +40,7 @@ attributes:
 # @note If an attribute listed below is hard-coded above in the `attributes`
 #   option, then it will not appear in the form page that the user sees in the
 #   Dashboard
-cluster: "phoenix-slurm"
+cluster: "ice-slurm"
 attributes:
   modules:
     widget: select
@@ -51,30 +51,22 @@ attributes:
       - [ "Anaconda 3 - TensorFlow GPU 2.9.0", "tensorflow-gpu/2.9.0" ]
       - [ "Anaconda 3 - PyTorch 1.12", "pytorch/1.12.0" ] 
   extra_jupyter_args: ""
-  bc_account:
-    label: "Charge Account"
-    help: "Required.  Has the format: `gts-<PI username>`"
-    required: true
   qos:
     widget: select
     label: "Quality of Service"
     options:
-      - ["embers"]
-      - ["inferno"]
-    value: "inferno"
+      - ["pace-ice"]
+      - ["coc-ice"]
+    value: "pace-ice"
     cacheable: false
   node_type:
     id: node_type
     label: "Node Type"
     widget: select
     options:
-      - ["CPU Only", "cpu"]
-      - ["CPU with Local SAS", "localSAS"]
-      - ["GPU Tesla RTX 6000", "RTX6000"]
-      - ["GPU Tesla V100-16GB", "V100-16GB"]
-      - ["GPU Tesla V100-32GB", "V100-32GB"]
-      - ["GPU Tesla A100-40GB", "A100-40GB"]
-      - ["AMD CPU", "cpu-amd"]
+      - ["First Available", "first"]
+      - ["NVIDIA RTX-6000", "RTX_6000"]
+      - ["AMD A40", "A40"]
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js
@@ -107,7 +99,6 @@ attributes:
 form:
   - modules
   - extra_jupyter_args
-  - bc_account
   - qos
   - node_type
   - bc_num_slots
