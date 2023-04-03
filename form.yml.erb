@@ -55,18 +55,20 @@ attributes:
     widget: select
     label: "Quality of Service"
     options:
-      - ["pace-ice"]
       - ["coc-ice"]
+      - ["coc-grade"]
+      - ["pace-ice"]
+      - ["pace-grade"]
     value: "pace-ice"
-    cacheable: false
   node_type:
     id: node_type
     label: "Node Type"
     widget: select
     options:
-      - ["First Available", "first"]
+      - ["CPU only", "cpu"]
       - ["NVIDIA RTX-6000", "RTX_6000"]
       - ["AMD A40", "A40"]
+    value: "CPU only"
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js
@@ -79,7 +81,7 @@ attributes:
     # Max and val will get properly initialized in form.js
     min: 1
     step: 1
-    help: 'Number of cores (CPUs) per node.  Max: 24 cores per node.'
+    help: 'Number of cores (CPUs) per node'
   num_mem_per_core:
     id: num_mem_per_core
     widget: number_field

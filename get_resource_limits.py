@@ -44,14 +44,19 @@ for nt in node_types:
         limit_vars['max_nodes'].append([nt.node_type, n])
 
         # Max walltime
-        t = row["TIMELIMIT"]
-        # sinfo doesn't output an ISO format, so parse it manually
-        if "-" in t:
-            days, t = t.split('-')
-        else:
-            days = 0
-        total = int(days) * 24 + int(t.split(':')[0])
-        limit_vars["max_walltimes"].append([nt.node_type, total])
+        #t = row["TIMELIMIT"]
+        ## sinfo doesn't output an ISO format, so parse it manually
+        #if "-" in t:
+        #    days, t = t.split('-')
+        #else:
+        #    days = 0
+        #total = int(days) * 24 + int(t.split(':')[0])
+        #limit_vars["max_walltimes"].append([nt.node_type, total])
+
+        # ROR 2023-04-03: A hack until I get the job qos limits sorted out.  
+        # TODO: Properly parse job qos limits from:
+        #     sacctmgr -p show qos format=name,maxtresmins
+        limit_vars["max_walltimes"].append([nt.node_type, "8"])
 
         # Max cores
         c = int(row["CPUS"])
