@@ -26,23 +26,11 @@ script:
     <%- unless num_mem_per_core.blank? -%>
     - "--mem-per-cpu=<%= num_mem_per_core.to_i %>G"
     <%- end -%>
-    <%- if node_type == "localSAS" -%>
-    - "--constraint=localSAS"
-    <%- end -%>
-    <%- if node_type == "cpu-amd" -%>
-    - "--constraint=cpu-amd"
-    <%- end -%>
     <%- if num_gpus.to_i >0 -%>
-    <%- if node_type == "V100-16GB" -%>
-    - "--gres=gpu:V100:<%= num_gpus.to_i %>"
-    - "--constraint=V100-16GB"
-    <%- elsif node_type == "V100-32GB" -%>
-    - "--gres=gpu:V100:<%= num_gpus.to_i %>"
-    - "--constraint=V100-32GB"
-    <%- elsif node_type == "RTX6000" -%>
+    <%- if node_type == "A40" -%>
+    - "--gres=gpu:A40:<%= num_gpus.to_i %>"
+    <%- elsif node_type == "RTX_6000" -%>
     - "--gres=gpu:RTX_6000:<%= num_gpus.to_i %>"
-    <%- elsif node_type == "A100-40GB" -%>
-    - "--gres=gpu:A100:<%= num_gpus.to_i %>"
     <%- end -%>
     <%- end -%>
 #  accounting_id: "account1"
