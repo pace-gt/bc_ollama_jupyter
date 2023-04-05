@@ -111,9 +111,24 @@ function _update_walltime_inputs(selected_node_type, selected_qos_type) {
     }
 }
 
-function node_type_change_handler(selected_node_type, selected_qos_type) {
+function _update_memory_inputs(selected_node_type, selected_cores) {
+    let node_type = selected_node_type[0].value
+    let cores = selected_cores[0].value
+    let mem_per_core = $('#num_mem_per_core')
+    let core_max = 32
+    if (max_node_mem.has(node_type)) {
+      let node_max = max_node_mem.get(node_type)
+      core_max = Math.floor(node_max / cores)
+    }
+    mem_per_core.attr('max', core_max)
+    mem_per_core.val(Math.min(Math.max(mem_per_core.val(), 1), core_max))
+}
+
+
+function node_type_change_handler(selected_node_type, selected_qos_type, selected_cores) {
     _update_gpu_inputs(selected_node_type)
     _update_cores_inputs(selected_node_type)
+    _update_memory_inputs(selected_node_type, selected_cores)
     _update_nodes_inputs(selected_node_type)
     _update_walltime_inputs(selected_node_type, selected_qos_type)
 }
@@ -122,15 +137,22 @@ function qos_change_handler(selected_node_type, selected_qos_type) {
     _update_walltime_inputs(selected_node_type, selected_qos_type)
 }
 
+function cores_change_handler(selected_node_type, selected_cores) {
+    _update_memory_inputs(selected_node_type, selected_cores)
+}
+
 $(document).ready(function () {
     let node_type = $('#batch_connect_session_context_node_type')
     let qos = $('#batch_connect_session_context_qos')
+    let cores = $('#num_cores')
   
     // Initialize everything on page load
-   node_type_change_handler(node_type, qos)
+   node_type_change_handler(node_type, qos, cores)
    qos_change_handler(node_type, qos)
+   cores_change_handler(node_type, cores)
   
     //Handles the change events
-    node_type.change(function () { node_type_change_handler(node_type, qos) })
+    node_type.change(function () { node_type_change_handler(node_type, qos, cores) })
     qos.change(function () { qos_change_handler(node_type, qos) })
+    cores.change(function () { cores_change_handler(node_type, cores) })
   })
