@@ -2,7 +2,7 @@
 
 // Can retrieve these using get_resource_limits.py script
 let max_nodes = new Map([
-    ['cpu', 4],
+    ['cpu', 2],
     ['A40', 1],
     ['RTX_6000', 1],
 ])
@@ -14,13 +14,13 @@ let max_walltimes = new Map([
 ])
 
 let max_cores = new Map([
-    ['cpu', 4],
+    ['cpu', 24],
     ['A40', 64],
     ['RTX_6000', 24],
 ])
 
 let max_node_mem = new Map([
-    ['cpu', 7],
+    ['cpu', 191],
     ['A40', 515],
     ['RTX_6000', 385],
 ])
@@ -30,6 +30,7 @@ let max_gpus = new Map([
     ['A40', 2],
     ['RTX_6000', 4],
 ])
+
 
 
 function _update_gpu_inputs(selected_node_type) {
