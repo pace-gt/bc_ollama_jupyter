@@ -26,11 +26,36 @@ script:
     <%- unless num_mem_per_core.blank? -%>
     - "--mem-per-cpu=<%= num_mem_per_core.to_i %>G"
     <%- end -%>
+    <%- if node_type == "intel_cpu" -%> 
+    - "--constraint=intel"
+    <%- elsif node_type == "intel_cpu_sas" -%> 
+    - "--constraint=intel,cpu-sas"
+    <%- elsif node_type == "amd_cpu" -%>
+    - "--constraint=amd"
+    <%- else -%>
     <%- if num_gpus.to_i >0 -%>
-    <%- if node_type == "A40" -%>
-    - "--gres=gpu:A40:<%= num_gpus.to_i %>"
+    <%- if node_type == "nvidia_gpu" -%>
+    - "--gres=gpu:<%= num_gpus.to_i %>"
+    - "--constraint=nvidia-gpu"
+    <%- elsif node_type == "V100_16GB" -%>
+    - "--gres=gpu:V100:<%= num_gpus.to_i %>"
+    - "--constraint=V100-16GB"
+    <%- elsif node_type == "V100_32GB" -%>
+    - "--gres=gpu:V100:<%= num_gpus.to_i %>" 
+    - "--constraint=V100-32GB"
+    <%- elsif node_type == "A100_40GB" -%>
+    - "--gres=gpu:A100:<%= num_gpus.to_i %>" 
+    - "--constraint=A100-40GB"
+    <%- elsif node_type == "A100_80GB" -%>
+    - "--gres=gpu:A100:<%= num_gpus.to_i %>" 
+    - "--constraint=A100-80GB"
     <%- elsif node_type == "RTX_6000" -%>
     - "--gres=gpu:RTX_6000:<%= num_gpus.to_i %>"
+    <%- elsif node_type == "A40" -%>
+    - "--gres=gpu:A40:<%= num_gpus.to_i %>"
+    <%- elsif node_type == "MI210" -%>
+    - "--gres=gpu:MI210:<%= num_gpus.to_i %>"
+    <%- end -%>
     <%- end -%>
     <%- end -%>
 #  accounting_id: "account1"
