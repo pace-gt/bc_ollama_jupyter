@@ -16,8 +16,26 @@ class NodeTypeInfo(NamedTuple):
     part_name: str
     inc_feat: set = {}
 
+# * Intel CPU
+# * Intel CPU SAS
+# * AMD CPU
+# * NVIDIA GPU (First avail)
+# * V100 16GB
+# * V100 32GB
+# * A100
+# * MI210
+
 node_types = [
     NodeTypeInfo(node_type="cpu", part_name="ice-cpu"),
+    NodeTypeInfo(node_type="intel_cpu", part_name="ice-cpu", inc_feat={"intel"}),
+    NodeTypeInfo(node_type="intel_cpu_sas", part_name="ice-cpu", inc_feat={"intel", "localSAS"}),
+    NodeTypeInfo(node_type="amd_cpu", part_name="ice-cpu", inc_feat={"amd"}),
+    NodeTypeInfo(node_type="nvidia_gpu", part_name="ice-gpu", inc_feat={"nvidia-gpu"}),
+    NodeTypeInfo(node_type="V100_16GB", part_name="ice-gpu", inc_feat={"V100-16GB"}),
+    NodeTypeInfo(node_type="V100_32GB", part_name="ice-gpu", inc_feat={"V100-32GB"}),
+    NodeTypeInfo(node_type="A100_40GB", part_name="ice-gpu", inc_feat={"A100-40GB"}),
+    NodeTypeInfo(node_type="A100_80GB", part_name="ice-gpu", inc_feat={"A100-80GB"}),
+    NodeTypeInfo(node_type="MI210", part_name="ice-gpu", inc_feat={"MI210"}),
     NodeTypeInfo(node_type="A40", part_name="ice-gpu", inc_feat={"A40"}),
     NodeTypeInfo(node_type="RTX_6000", part_name="ice-gpu", inc_feat={"RTX6000"}),
 ]
@@ -59,7 +77,7 @@ for nt in node_types:
         limit_vars["max_walltimes"].append([nt.node_type, "8"])
 
         # Max cores
-        c = int(row["CPUS"])
+        c = int(row["CPUS"].strip("+"))
         limit_vars["max_cores"].append([nt.node_type, c])
 
         # Max memory
