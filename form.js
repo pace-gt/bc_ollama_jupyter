@@ -14,14 +14,15 @@ let max_nodes = new Map([
     ['MI210', 2],
     ['A40', 2],
     ['RTX_6000', 10],
+    ['H100_HGX', 20],
 ])
 
 let max_walltimes = new Map([
     ['cpu', '8'],
-    ['intel_cpu', '8'],
+        ['intel_cpu', '8'],
     ['intel_cpu_sas', '8'],
     ['amd_cpu', '8'],
-    ['nvidia_gpu', '8'],
+        ['nvidia_gpu', '8'],
     ['V100_16GB', '8'],
     ['V100_32GB', '8'],
     ['V100_32GB', '8'],
@@ -30,51 +31,55 @@ let max_walltimes = new Map([
     ['MI210', '8'],
     ['A40', '8'],
     ['RTX_6000', '8'],
+    ['H100_HGX', '8'],
 ])
 
 let max_cores = new Map([
     ['cpu', 24],
-    ['intel_cpu', 24],
+        ['intel_cpu', 24],
     ['intel_cpu_sas', 24],
     ['amd_cpu', 64],
-    ['nvidia_gpu', 64],
+        ['nvidia_gpu', 64],
     ['V100_16GB', 24],
-    ['V100_32GB', 40],
+        ['V100_32GB', 40],
     ['A100_40GB', 64],
     ['A100_80GB', 64],
     ['MI210', 64],
     ['A40', 64],
     ['RTX_6000', 24],
+    ['H100_HGX', 64],
 ])
 
 let max_node_mem = new Map([
     ['cpu', 191],
-    ['intel_cpu', 385],
+        ['intel_cpu', 385],
     ['intel_cpu_sas', 385],
     ['amd_cpu', 515],
-    ['nvidia_gpu', 515],
+        ['nvidia_gpu', 515],
     ['V100_16GB', 385],
-    ['V100_32GB', 191],
+        ['V100_32GB', 191],
     ['A100_40GB', 515],
     ['A100_80GB', 515],
     ['MI210', 515],
     ['A40', 515],
     ['RTX_6000', 191],
+    ['H100_HGX', 2063],
 ])
 
 let max_gpus = new Map([
     ['cpu', 0],
-    ['intel_cpu', 0],
+        ['intel_cpu', 0],
     ['intel_cpu_sas', 0],
     ['amd_cpu', 0],
-    ['nvidia_gpu', 4],
-    ['V100_16GB', 2],
-    ['V100_32GB', 4],
+        ['nvidia_gpu', 4],
+        ['V100_16GB', 2],
+        ['V100_32GB', 4],
     ['A100_40GB', 2],
     ['A100_80GB', 2],
     ['MI210', 2],
     ['A40', 2],
     ['RTX_6000', 4],
+    ['H100_HGX', 8],
 ])
 
 

@@ -1,6 +1,6 @@
 ---
 name: Jupyter 
-category: Interactive Apps
+category: RHEL 9 Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |

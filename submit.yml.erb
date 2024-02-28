@@ -55,6 +55,8 @@ script:
     - "--gres=gpu:A40:<%= num_gpus.to_i %>"
     <%- elsif node_type == "MI210" -%>
     - "--gres=gpu:MI210:<%= num_gpus.to_i %>"
+    <%- elsif node_type == "H100_HGX" -%>
+    - "--gres=gpu:H100:<%= num_gpus.to_i %>"
     <%- end -%>
     <%- end -%>
     <%- end -%>

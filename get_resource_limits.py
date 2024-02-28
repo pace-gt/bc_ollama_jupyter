@@ -38,6 +38,7 @@ node_types = [
     NodeTypeInfo(node_type="MI210", part_name="ice-gpu", inc_feat={"MI210"}),
     NodeTypeInfo(node_type="A40", part_name="ice-gpu", inc_feat={"A40"}),
     NodeTypeInfo(node_type="RTX_6000", part_name="ice-gpu", inc_feat={"RTX6000"}),
+    NodeTypeInfo(node_type="H100_HGX", part_name="coe-gpu", inc_feat={"H100-HGX"}),
 ]
 
 # Key is variable name for a resource limit ('max_nodes', etc).  
