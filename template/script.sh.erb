@@ -31,7 +31,9 @@ logger -p user.notice -t "ondemand" -- "User: $USER; SubmitHost: $HOSTNAME; JobN
 <%- if context.version == "anaconda3/2023.03" %>
 jupyter <%= context.jupyter_interface %> --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %> 
 <%- elsif context.version == "tensorflow/2.13" %>
-apptainer exec --nv $TENSORFLOW_2_13_SIF jupyter <%= context.jupyter_interface %> --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
+apptainer exec --nv "$TENSORFLOW_2_13_SIF" jupyter <%= context.jupyter_interface %> --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
 <%- elsif context.version == "pytorch/2.1.0" %>
-apptainer exec --nv $PYTORCH_2_1_0_SIF jupyter <%= context.jupyter_interface %> --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
+apptainer exec --nv "$PYTORCH_2_1_0_SIF" jupyter <%= context.jupyter_interface %> --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
+<%- elsif context.version == "pillow/10.2.0" %>
+apptainer exec --nv "$PILLOW_10_2_0_SIF" jupyter <%= context.jupyter_interface %> --debug --config="${CONFIG_FILE}" <%= context.extra_jupyter_args %>
 <%- end -%>

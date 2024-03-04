@@ -1,3 +1,4 @@
+title: Jupyter (RHEL 9)
 cluster: "ice-slurm"
 attributes:
   version:
@@ -5,9 +6,10 @@ attributes:
     widget: select
     label: "Anaconda Module"
     options:
-      - [ "Anaconda 3 - 2023.03", "anaconda3/2023.03" ]
-      - [ "TensorFlow - 2.13", "tensorflow/2.13" ]
-      - [ "PyTorch - 2.1.0", "pytorch/2.1.0" ]
+      - [ "Anaconda3 2023.03", "anaconda3/2023.03" ]
+      - [ "TensorFlow 2.13", "tensorflow/2.13" ]
+      - [ "PyTorch 2.1.0", "pytorch/2.1.0" ]
+      - [ "Pillow 10.2.0 + scikit-learn 1.4.0 + PyTorch 2.1.0", "pillow/10.2.0"]
   jupyter_interface:
     widget: select
     label: "Jupyter Interface"
@@ -23,7 +25,8 @@ attributes:
       - ["Default (none)", ""]
       - ["coc-ice", "coc-ice"]
       - ["coc-grade", "coc-grade"]
-      - ["coe-gpu", "coe-gpu"]
+      - ["coe-ice", "coe-ice"]
+      - ["coe-grade", "coe-grade"]
       - ["pace-ice", "pace-ice"]
       - ["pace-grade", "pace-grade"]
     value: "Default (none)"
