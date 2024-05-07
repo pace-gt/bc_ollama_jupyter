@@ -1,9 +1,18 @@
 "use strict"
 
-// Can retrieve these using get_resource_limits.py script
-
 let max_nodes = new Map([
-    ['cpu', 2],
+    ['cpu', 64],
+    ['intel_cpu', 60],
+    ['intel_cpu_sas', 1],
+    ['amd_cpu', 4],
+    ['nvidia_gpu', 35],
+    ['V100_16GB', 11],
+    ['V100_32GB', 8],
+    ['A100_40GB', 2],
+    ['A100_80GB', 2],
+    ['MI210', 2],
+    ['A40', 2],
+    ['RTX_6000', 10],
     ['H100_HGX', 20],
 ])
 
@@ -11,25 +20,69 @@ let max_nodes = new Map([
 // partition only, but Slurm uses a combination of nodes and partitions
 // to determine this limit
 let max_walltimes = new Map([
-    ['cpu', 18],
+    ['cpu', '8'],
+    ['intel_cpu', '8'],
+    ['intel_cpu_sas', '8'],
+    ['amd_cpu', '8'],
+    ['nvidia_gpu', '8'],
+    ['V100_16GB', '8'],
+    ['V100_32GB', '8'],
+    ['V100_32GB', '8'],
+    ['A100_40GB', '8'],
+    ['A100_80GB', '8'],
+    ['MI210', '8'],
+    ['A40', '8'],
+    ['RTX_6000', '8'],
     ['H100_HGX', 16],
 ])
 
 let max_cores = new Map([
     ['cpu', 24],
+    ['intel_cpu', 24],
+    ['intel_cpu_sas', 24],
+    ['amd_cpu', 64],
+    ['nvidia_gpu', 64],
+    ['V100_16GB', 24],
+    ['V100_32GB', 40],
+    ['A100_40GB', 64],
+    ['A100_80GB', 64],
+    ['MI210', 64],
+    ['A40', 64],
+    ['RTX_6000', 24],
     ['H100_HGX', 64],
 ])
 
 let max_node_mem = new Map([
     ['cpu', 191],
+    ['intel_cpu', 385],
+    ['intel_cpu_sas', 385],
+    ['amd_cpu', 515],
+    ['nvidia_gpu', 515],
+    ['V100_16GB', 385],
+    ['V100_32GB', 191],
+    ['A100_40GB', 515],
+    ['A100_80GB', 515],
+    ['MI210', 515],
+    ['A40', 515],
+    ['RTX_6000', 191],
     ['H100_HGX', 2063],
 ])
 
 let max_gpus = new Map([
     ['cpu', 0],
+    ['intel_cpu', 0],
+    ['intel_cpu_sas', 0],
+    ['amd_cpu', 0],
+    ['nvidia_gpu', 4],
+    ['V100_16GB', 2],
+    ['V100_32GB', 4],
+    ['A100_40GB', 2],
+    ['A100_80GB', 2],
+    ['MI210', 2],
+    ['A40', 2],
+    ['RTX_6000', 4],
     ['H100_HGX', 8],
 ])
-
 
 
 function _update_gpu_inputs(selected_node_type) {
@@ -111,48 +164,26 @@ function _update_walltime_inputs(selected_node_type, selected_qos_type) {
     }
 }
 
-function _update_memory_inputs(selected_node_type, selected_cores) {
-    let node_type = selected_node_type[0].value
-    let cores = selected_cores[0].value
-    let mem_per_core = $('#num_mem_per_core')
-    let core_max = 32
-    if (max_node_mem.has(node_type)) {
-      let node_max = max_node_mem.get(node_type)
-      core_max = Math.floor(node_max / cores)
-    }
-    mem_per_core.attr('max', core_max)
-    mem_per_core.val(Math.min(Math.max(mem_per_core.val(), 1), core_max))
-}
-
-
-function node_type_change_handler(selected_node_type, selected_qos_type, selected_cores) {
+function node_type_change_handler(selected_node_type, selected_qos_type) {
     _update_gpu_inputs(selected_node_type)
     _update_cores_inputs(selected_node_type)
-    _update_memory_inputs(selected_node_type, selected_cores)
     _update_nodes_inputs(selected_node_type)
-    // _update_walltime_inputs(selected_node_type, selected_qos_type)
+    //_update_walltime_inputs(selected_node_type, selected_qos_type)
 }
 
 function qos_change_handler(selected_node_type, selected_qos_type) {
-    // _update_walltime_inputs(selected_node_type, selected_qos_type)
-}
-
-function cores_change_handler(selected_node_type, selected_cores) {
-    _update_memory_inputs(selected_node_type, selected_cores)
+    //_update_walltime_inputs(selected_node_type, selected_qos_type)
 }
 
 $(document).ready(function () {
     let node_type = $('#batch_connect_session_context_node_type')
     let qos = $('#batch_connect_session_context_qos')
-    let cores = $('#num_cores')
   
     // Initialize everything on page load
-   node_type_change_handler(node_type, qos, cores)
+   node_type_change_handler(node_type, qos)
    qos_change_handler(node_type, qos)
-   cores_change_handler(node_type, cores)
   
     //Handles the change events
-    node_type.change(function () { node_type_change_handler(node_type, qos, cores) })
+    node_type.change(function () { node_type_change_handler(node_type, qos) })
     qos.change(function () { qos_change_handler(node_type, qos) })
-    cores.change(function () { cores_change_handler(node_type, cores) })
   })

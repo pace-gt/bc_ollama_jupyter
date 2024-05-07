@@ -1,5 +1,5 @@
-title: Jupyter (RHEL 9)
-cluster: "ice-slurm"
+title: Jupyter
+cluster: "ice-rh9"
 attributes:
   version:
     id: version
@@ -36,7 +36,18 @@ attributes:
     widget: select
     options:
       - ['CPU (first avail)', 'cpu']
+      - ['Intel CPU', 'intel_cpu']
+      - ['Intel CPU localSAS', 'intel_cpu_sas']
+      - ['AMD CPU', 'amd_cpu']
+      - ['NVIDIA GPU (first avail)', 'nvidia_gpu']
+      - ['NVIDIA GPU V100 16GB', 'V100_16GB']
+      - ['NVIDIA GPU V100 32GB', 'V100_32GB']
+      - ['NVIDIA GPU A100 40GB', 'A100_40GB']
+      - ['NVIDIA GPU A100 80GB', 'A100_80GB']
+      - ['NVIDIA GPU RTX6000', 'RTX_6000']
+      - ['NVIDIA GPU A40', 'A40']
       - ["NVIDIA GPU H100 HGX", "H100_HGX"]
+      - ['AMD GPU M1210', 'MI210']
   bc_num_slots:
     label: "Nodes"
     # Max and val will get properly initialized in form.js
