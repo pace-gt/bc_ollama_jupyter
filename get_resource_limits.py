@@ -26,18 +26,9 @@ class NodeTypeInfo(NamedTuple):
 # * MI210
 
 node_types = [
-    NodeTypeInfo(node_type="cpu", part_name="ice-cpu"),
-    NodeTypeInfo(node_type="intel_cpu", part_name="ice-cpu", inc_feat={"intel"}),
-    NodeTypeInfo(node_type="intel_cpu_sas", part_name="ice-cpu", inc_feat={"intel", "localSAS"}),
-    NodeTypeInfo(node_type="amd_cpu", part_name="ice-cpu", inc_feat={"amd"}),
-    NodeTypeInfo(node_type="nvidia_gpu", part_name="ice-gpu", inc_feat={"nvidia-gpu"}),
-    NodeTypeInfo(node_type="V100_16GB", part_name="ice-gpu", inc_feat={"V100-16GB"}),
-    NodeTypeInfo(node_type="V100_32GB", part_name="ice-gpu", inc_feat={"V100-32GB"}),
-    NodeTypeInfo(node_type="A100_40GB", part_name="ice-gpu", inc_feat={"A100-40GB"}),
-    NodeTypeInfo(node_type="A100_80GB", part_name="ice-gpu", inc_feat={"A100-80GB"}),
-    NodeTypeInfo(node_type="MI210", part_name="ice-gpu", inc_feat={"MI210"}),
-    NodeTypeInfo(node_type="A40", part_name="ice-gpu", inc_feat={"A40"}),
-    NodeTypeInfo(node_type="RTX_6000", part_name="ice-gpu", inc_feat={"RTX6000"}),
+    NodeTypeInfo(node_type='cpu', part_name='cpu-small', inc_feat={'rhel9'}),
+    NodeTypeInfo(node_type='V100_16GB', part_name='gpu-v100', inc_feat={'rhel9', 'V100-16GB'}),
+    NodeTypeInfo(node_type='RTX6000', part_name='gpu-rtx6000', inc_feat={'rhel9', 'RTX6000'}),
     NodeTypeInfo(node_type="H100_HGX", part_name="coe-gpu", inc_feat={"H100-HGX"}),
 ]
 
