@@ -8,7 +8,6 @@ attributes:
       - ["Jupyter Notebook", "notebook"]
       - ["JupyterLab", "lab"]
     value: "Jupyter Notebook"
-  extra_jupyter_args: ""
   bc_account:
     label: "Charge Account"
     required: true
@@ -24,46 +23,38 @@ attributes:
     label: "Node Type"
     widget: select
     options:
-      - ['CPU', 'cpu']
       - ['NVIDIA GPU V100 16GB', 'V100_16GB']
       - ['NVIDIA GPU RTX6000', 'RTX_6000']
-  bc_num_slots:
-    label: "Nodes"
-    # Max and val will get properly initialized in form.js
-    min: 1
-    step: 1
-  num_cores:
-    id: num_cores
-    widget: number_field
-    label: "Cores Per Node"
-    # Max and val will get properly initialized in form.js
-    min: 1
-    step: 1
-    help: 'Number of cores (CPUs) per node'
-  num_mem_per_core:
-    id: num_mem_per_core
-    widget: number_field
-    label: "Memory Per Core (GB)"
-    min: 1
-    step: 1
-    value: ""
-    help: "Leave blank if unsure."
   num_gpus:
     id: num_gpus
-    label: "GPUs Per Node"
+    label: "GPUs"
     widget: number_field
     # Min, max, and val will get initialized properly in form.js
     step: 1
+    value: 1
+  num_cores:
+    id: num_cores
+    widget: number_field
+    label: "CPUs"
+    # Max and val will get properly initialized in form.js
+    min: 1
+    step: 1
+    value: 4
+  num_mem:
+    id: num_mem
+    widget: number_field
+    label: "Memory (GB)"
+    min: 1
+    step: 1
+    value: 32
 
 form:
-  - extra_jupyter_args
-  - jupyter_interface
   - bc_account
   - qos
+  - jupyter_interface
   - node_type
-  - bc_num_slots
-  - num_cores
   - num_gpus
-  - num_mem_per_core
+  - num_cores
+  - num_mem
   - bc_num_hours
   - bc_email_on_started
