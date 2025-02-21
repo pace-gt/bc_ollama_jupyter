@@ -3,19 +3,70 @@ set -e -o pipefail
 
 #logger -p user.notice -t "ondemand" -- "User: $USER; SubmitHost: $HOSTNAME; JobName: $SLURM_JOB_NAME; Queue: $SLURM_JOB_PARTITION; JobID: $SLURM_JOB_ID"
 
-# Benchmark info
-echo "TIMING - Starting main script at: $(date)"
+# =======================================
+# Find a port for Ollama
+# =======================================
 
-# Set working directory to home directory
-cd "${HOME}"
+# This finds an open port for Ollama.
+# We don't want to directly use OOD's internal find_port 
+# because it seems like OOD will use the discovered port to 
+# proxy Jupyter (which we don't want!).  Here, I've copy-pasted
+# OOD's shell functions with some changes.
+my_find_port () {
+    local host=localhost
+    # The usual private port range for TCP
+    local min_port=49152
+    local max_port=65535
+    local port_range=($(shuf -i ${min_port}-${max_port}))
+    local retries=1 # number of retries over the port range if first attempt fails
+    for ((attempt=0; attempt<=$retries; attempt++)); do
+    for port in "${port_range[@]}"; do
+        if my_port_used "${host}:${port}"; then
+        continue
+        fi
+        echo "${port}"
+        return 0 # success
+    done
+    done
+    echo "error: failed to find available port in range ${min_port}..${max_port}" >&2
+    return 1 # failure
+}
 
+my_port_used () {
+    local port="${1#*:}"
+    local host=$((expr "${1}" : '\\(.*\\):' || echo "localhost") | awk 'END{print $NF}')
+    my_port_used_nc $host $port
+    status=$?
+    if [[ "$status" == "0" ]] || [[ "$status" == "1" ]]; then
+        return $status
+    fi
+    return 127
+}
+
+my_port_used_nc(){
+    nc -w 2 "$1" "$2" < /dev/null > /dev/null 2>&1
+}
+
+# =======================================
+# Startup Ollama
+# =======================================
+
+set +x
+export ollama_port="$(my_find_port)"
+set -x
+
+export OLLAMA_HOST="127.0.0.1:$ollama_port"
 export PYTHONNOUSERSITE=1
+
 module purge
 module load ollama ollama-python
 module list
 
-# Start ollama server
-apptainer instance run --nv "$OLLAMA_SIF" "ollama-server-$SLURM_JOB_ID"
+apptainer instance run \
+    --nv \
+    --env "OLLAMA_HOST=$OLLAMA_HOST" \
+    "$OLLAMA_SIF" \
+    "ollama-server-$SLURM_JOB_ID"
 apptainer instance list --logs
 
 # Caputer logs from instance
@@ -39,6 +90,9 @@ function capture_in_instance_logs {
 capture_in_instance_logs '(\S+err\b)'
 capture_in_instance_logs '(\S+out\b)'
 
-# Launch the Jupyter Notebook Server
-set -x
+# =======================================
+# Startup Jupyter
+# =======================================
+
+cd "${HOME}"
 jupyter <%= context.jupyter_interface %> --debug --config="$CONFIG_FILE" 
