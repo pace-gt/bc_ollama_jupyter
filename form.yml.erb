@@ -1,15 +1,6 @@
-title: Jupyter
+title: Ollama + Jupyter
 cluster: "phoenix-dev"
 attributes:
-  version:
-    id: version
-    widget: select
-    label: "Anaconda Module"
-    options:
-      - [ "Anaconda3 2023.03", "anaconda3/2023.03" ]
-      - [ "TensorFlow 2.13", "tensorflow/2.13" ]
-      - [ "PyTorch 2.1.0", "pytorch/2.1.0" ]
-      - [ "Pillow 10.2.0 + scikit-learn 1.4.0 + PyTorch 2.1.0", "pillow/10.2.0"]
   jupyter_interface:
     widget: select
     label: "Jupyter Interface"
@@ -65,7 +56,6 @@ attributes:
     step: 1
 
 form:
-  - version
   - extra_jupyter_args
   - jupyter_interface
   - bc_account

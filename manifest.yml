@@ -1,7 +1,9 @@
 ---
-name: Jupyter
+name: Ollama + Jupyter
 category: Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |
-  This app will launch a Jupyter Notebook server on one or more nodes.
+  This app starts an Ollama server in the background and connect you to a Jupyter session in the foreground.
+
+  The Jupyter session contains the ollama and hugging-face Python modules.
