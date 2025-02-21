@@ -47,6 +47,24 @@ my_port_used_nc(){
     nc -w 2 "$1" "$2" < /dev/null > /dev/null 2>&1
 }
 
+my_wait_until_port_used () {
+    local port="${1}"
+    local time="${2:-30}"
+    for ((i=1; i<=time*2; i++)); do
+    my_port_used "${port}"
+    port_status=$?
+    if [ "$port_status" == "0" ]; then
+        return 0
+    elif [ "$port_status" == "127" ]; then
+        echo "commands to find port were either not found or inaccessible."
+        echo "command options are lsof, nc, bash's /dev/tcp, or python (or python3) with socket lib."
+        return 127
+    fi
+    sleep 0.5
+    done
+    return 1
+}
+
 # =======================================
 # Startup Ollama
 # =======================================
@@ -89,6 +107,18 @@ function capture_in_instance_logs {
 
 capture_in_instance_logs '(\S+err\b)'
 capture_in_instance_logs '(\S+out\b)'
+
+set +x
+echo "Waiting for Ollama server to open port ${ollama_port}..."
+echo "TIMING - Starting wait at: $(date)"
+if my_wait_until_port_used "127.0.0.1:${ollama_port}" 60; then
+  echo "Discovered Ollama server listening on port ${ollama_port}!"
+  echo "TIMING - Wait ended at: $(date)"
+else
+  echo "Timed out waiting for Jupyter Notebook server to open port ${ollama_port}!"
+  echo "TIMING - Wait ended at: $(date)"
+fi
+set -x
 
 # =======================================
 # Startup Jupyter
