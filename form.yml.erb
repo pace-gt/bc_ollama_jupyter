@@ -8,16 +8,22 @@ attributes:
       - ["Jupyter Notebook", "notebook"]
       - ["JupyterLab", "lab"]
     value: "Jupyter Notebook"
-  bc_account:
-    label: "Charge Account"
-    required: true
-  qos:
+  model_dir_select:
     widget: select
-    label: "Quality of Service"
+    label: "Model Directory"
     options:
-      - ["embers"]
-      - ["inferno"]
-    value: "inferno"
+      - ["/tmp", "tmpdir", data-hide-model-dir: true, data-set-model-dir: "$TMPDIR/models"]
+      - ["Home", "home", data-hide-model-dir: true, data-set-model-dir: "<%= CurrentUser.home %>"]
+      - ["Shared", "shared", data-hide-model-dir: true, data-set-model-dir: "/storage/coda1/d-pace_community/0/ollama/models"]
+      - ["Custom", "custom",  data-set-model-dir: ""]
+  model_dir:
+    widget: "path_selector"
+    label: "Custom Model Path"
+    directory: "<%= CurrentUser.home %>"
+    required: true
+    show_files: false
+    readonly: false
+    show_hidden: true
   node_type:
     id: node_type
     label: "Node Type"
@@ -47,14 +53,26 @@ attributes:
     min: 1
     step: 1
     value: 32
+  bc_account:
+    label: "Charge Account"
+    required: true
+  qos:
+    widget: select
+    label: "Quality of Service"
+    options:
+      - ["embers"]
+      - ["inferno"]
+    value: "inferno"
 
 form:
-  - bc_account
-  - qos
   - jupyter_interface
+  - model_dir_select
+  - model_dir
   - node_type
   - num_gpus
   - num_cores
   - num_mem
   - bc_num_hours
+  - bc_account
+  - qos
   - bc_email_on_started

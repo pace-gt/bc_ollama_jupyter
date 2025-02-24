@@ -80,9 +80,12 @@ module purge
 module load ollama llm-python-apis
 module list
 
+mkdir -p "<%= context.model_dir %>"
+
 apptainer instance run \
     --nv \
     --env "OLLAMA_HOST=$OLLAMA_HOST" \
+    --bind "<%= context.model_dir %>:$HOME/.ollama/models" \
     "$OLLAMA_SIF" \
     "ollama-server-$SLURM_JOB_ID"
 apptainer instance list --logs
