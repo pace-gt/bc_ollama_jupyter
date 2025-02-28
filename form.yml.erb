@@ -5,30 +5,32 @@ attributes:
     widget: select
     label: "Python Environment"
     options:
-      - [ "Default", "default", data-hide-venv-path: true ]
-      - [ "Custom virtual environment...", "venv" ]
-      #- [ "Custom Apptainer image...", ""]
+      - [ "Default", "default", data-hide-venv-path: true, data-hide-sif-path: true ]
+      - [ "Custom virtual environment...", "venv", data-hide-sif-path: true ]
+      - [ "Custom Apptainer image...", "apptainer", data-hide-venv-path: true ]
     value: "Default"
     cacheable: true
+    help: |
+      * *Default*: Preinstalled environment containing the `ollama` and `openai` modules
+      * *Custom virtual environment..*: Specify a directory for a Python virtual environment, created with Python standard library `venv`.  The env must have jupyter installed.
+      * *Custom Apptainer image...*: Specify a path to an Apptainer image file.  The image must have jupyter installed and available on the container's `$PATH`
   venv_path:
     widget: "path_selector"
     label: "Virtual Environment Path"
     directory: "<%= CurrentUser.home %>"
-    required: true
     readonly: false
     show_hidden: false
     show_files: false
     cacheable: true
-  #sif_path:
-  #  widget: "path_selector"
-  #  label: "Apptainer Image Path"
-  #  directory: "<%= CurrentUser.home %>"
-  #  #required: true
-  #  readonly: false
-  #  show_hidden: false
-  #  favorites:
-  #    - "<%= CurrentUser.home %>"
-  #    - "<%= CurrentUser.home %>/scratch"
+  sif_path:
+    widget: "path_selector"
+    label: "Apptainer Image Path"
+    directory: "<%= CurrentUser.home %>"
+    readonly: false
+    show_hidden: false
+    favorites:
+      - "<%= CurrentUser.home %>"
+      - "<%= CurrentUser.home %>/scratch"
   jupyter_interface:
     widget: select
     label: "Jupyter Interface"
@@ -105,7 +107,7 @@ attributes:
 
 form:
   - python_env
-  #- sif_path
+  - sif_path
   - venv_path
   - jupyter_interface
   - model_dir_select
