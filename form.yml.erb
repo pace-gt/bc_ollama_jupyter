@@ -22,15 +22,17 @@ attributes:
     show_hidden: false
     show_files: false
     cacheable: true
+    favorites:
+      - "<%= CurrentUser.home %>"
   sif_path:
     widget: "path_selector"
     label: "Apptainer Image Path"
     directory: "<%= CurrentUser.home %>"
     readonly: false
     show_hidden: false
+    cacheable: true
     favorites:
       - "<%= CurrentUser.home %>"
-      - "<%= CurrentUser.home %>/scratch"
   jupyter_interface:
     widget: select
     label: "Jupyter Interface"
@@ -38,13 +40,14 @@ attributes:
       - ["Jupyter Notebook", "notebook"]
       - ["JupyterLab", "lab"]
     value: "Jupyter Notebook"
+    cacheable: true
   model_dir_select:
     widget: select
     label: "Models Directory"
     options:
-      - ["PACE shared models", "shared", data-hide-model-dir: true, data-set-model-dir: "/storage/coda1/d-pace_community/0/ollama/models"]
-      - ["Temporary directory", "tmpdir", data-hide-model-dir: true, data-set-model-dir: "$TMPDIR/models"]
-      - ["Custom directory...", "custom",  data-set-model-dir: ""]
+      - ["PACE shared models", "pace", data-hide-model-dir: true]
+      - ["Temporary directory", "tmpdir", data-hide-model-dir: true]
+      - ["Custom directory...", "custom"]
     help: |
       Location for Ollama models that are downloaded or imported.
 
@@ -60,11 +63,12 @@ attributes:
     widget: "path_selector"
     label: "Custom Models Directory"
     directory: "<%= CurrentUser.home %>"
-    required: true
     show_files: false
     readonly: false
     show_hidden: true
     cacheable: true
+    favorites:
+      - "<%= CurrentUser.home %>"
   node_type:
     id: node_type
     label: "Node Type"
@@ -72,6 +76,7 @@ attributes:
     options:
       - ['NVIDIA GPU V100 16GB', 'V100_16GB']
       - ['NVIDIA GPU RTX6000', 'RTX_6000']
+    cacheable: true
   num_gpus:
     id: num_gpus
     label: "GPUs"
@@ -97,6 +102,7 @@ attributes:
   bc_account:
     label: "Charge Account"
     required: true
+    cacheable: true
   qos:
     widget: select
     label: "Quality of Service"
@@ -104,6 +110,7 @@ attributes:
       - ["embers"]
       - ["inferno"]
     value: "inferno"
+    cacheable: true
 
 form:
   - python_env

@@ -83,16 +83,29 @@ module load ollama
 module load llm-python-apis
 <%- elsif context.python_env == "venv" %>
 source "<%= context.venv_path %>/bin/activate"
-<%- end %>
+<%- end -%>
 
 module list
 
-mkdir -p "<%= context.model_dir %>"
+<%- if context.model_dir_select == "pace" %>
+model_dir="/storage/coda1/d-pace_community/0/ollama/models"
+<%- elsif context.model_dir_select == "tmpdir" %>
+model_dir="$TMPDIR/models"
+mkdir -p "$model_dir"
+<%- elsif context.model_dir_select == "custom" %>
+model_dir="<%= context.model_dir %>"
+if [[ ! -d $model_dir ]]; then
+  echo "Error: Specified model directory '$model_dir' does not exist"
+  exit 1
+fi
+<%- end -%>
+
+echo "Using model dir: $model_dir"
 
 apptainer instance run \
     --nv \
     --env "OLLAMA_HOST=$OLLAMA_HOST" \
-    --bind "<%= context.model_dir %>:$HOME/.ollama/models" \
+    --bind "$model_dir:$HOME/.ollama/models" \
     "$OLLAMA_SIF" \
     "ollama-server-$SLURM_JOB_ID"
 apptainer instance list --logs
