@@ -10,15 +10,23 @@ attributes:
     value: "Jupyter Notebook"
   model_dir_select:
     widget: select
-    label: "Model Directory"
+    label: "Models Directory"
     options:
-      - ["/tmp", "tmpdir", data-hide-model-dir: true, data-set-model-dir: "$TMPDIR/models"]
-      - ["Home", "home", data-hide-model-dir: true, data-set-model-dir: "<%= CurrentUser.home %>"]
-      - ["Shared", "shared", data-hide-model-dir: true, data-set-model-dir: "/storage/coda1/d-pace_community/0/ollama/models"]
-      - ["Custom", "custom",  data-set-model-dir: ""]
+      - ["PACE shared models", "shared", data-hide-model-dir: true, data-set-model-dir: "/storage/coda1/d-pace_community/0/ollama/models"]
+      - ["Temporary directory", "tmpdir", data-hide-model-dir: true, data-set-model-dir: "$TMPDIR/models"]
+      - ["Custom directory...", "custom",  data-set-model-dir: ""]
+    help: |
+      Location for Ollama models that are downloaded or imported.
+
+      * *PACE shared models* : Contains already-downloaded models.  Maintained and updated by PACE staff.  
+        It is read-only and does not allow you to download/import additional models.
+      * *Tempoary directory* : Temporary storage that does *not* persist after the OOD session ends.  
+        This is writable and allows you to download/import additional models.
+      * *Custom directory...* : A directory chosen by you.  If the location is writeable, you can download/import additional models.  
+        It is recommended to use a directory in `~/project`,  `~/shared`, or `~/scratch` space.  
   model_dir:
     widget: "path_selector"
-    label: "Custom Model Path"
+    label: "Custom Models Directory"
     directory: "<%= CurrentUser.home %>"
     required: true
     show_files: false
