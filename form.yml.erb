@@ -11,9 +11,9 @@ attributes:
     value: "Default"
     cacheable: true
     help: |
-      * *Default*: Preinstalled environment containing the `ollama` and `openai` modules
-      * *Custom virtual environment..*: Specify a directory for a Python virtual environment, created with Python standard library `venv`.  The env must have jupyter installed.
-      * *Custom Apptainer image...*: Specify a path to an Apptainer image file.  The image must have jupyter installed and available on the container's `$PATH`
+      * *Default*: Preinstalled environment with the `ollama` and `openai` packages.
+      * *Custom virtual environment..* : The top-level directory of an existing Python virtual environment, created via `venv`.  The env must have the `jupyter` package installed.
+      * *Custom Apptainer image...* : Path to an existing Apptainer image file.  The image must have Python and `jupyter` installed and available on the container's `$PATH`.
   venv_path:
     widget: "path_selector"
     label: "Virtual Environment Path"
@@ -39,7 +39,7 @@ attributes:
     options:
       - ["Jupyter Notebook", "notebook"]
       - ["JupyterLab", "lab"]
-    value: "Jupyter Notebook"
+    value: "JupyterLab"
     cacheable: true
   model_dir_select:
     widget: select
@@ -49,14 +49,9 @@ attributes:
       - ["Temporary directory", "tmpdir", data-hide-model-dir: true]
       - ["Custom directory...", "custom"]
     help: |
-      Location for Ollama models that are downloaded or imported.
-
-      * *PACE shared models* : Contains already-downloaded models.  Maintained and updated by PACE staff.  
-        It is read-only and does not allow you to download/import additional models.
-      * *Tempoary directory* : Temporary storage that does *not* persist after the OOD session ends.  
-        This is writable and allows you to download/import additional models.
-      * *Custom directory...* : A directory chosen by you.  If the location is writeable, you can download/import additional models.  
-        It is recommended to use a directory in `~/project`,  `~/shared`, or `~/scratch` space.  
+      * *PACE shared models* : Contains already-downloaded models.  It is read-only and does not allow you to download/import additional models.
+      * *Tempoary directory* : Does *not* persist after the OOD session ends.  This is writable and allows you to download/import additional models.
+      * *Custom directory...* : An existing directory chosen by you.  If the location is writeable, you can download/import additional models.  This allows you to re-use models between OOD sessions.  It is recommended to use a directory in `~/project`,  `~/shared`, or `~/scratch`.
     value: "PACE shared models"
     cacheable: true
   model_dir:
@@ -116,9 +111,9 @@ form:
   - python_env
   - sif_path
   - venv_path
-  - jupyter_interface
   - model_dir_select
   - model_dir
+  - jupyter_interface
   - node_type
   - num_gpus
   - num_cores

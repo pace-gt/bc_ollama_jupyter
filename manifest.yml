@@ -4,6 +4,4 @@ category: Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |
-  This app starts an Ollama server in the background and connect you to a Jupyter session in the foreground.
-
-  The Jupyter session contains the ollama and hugging-face Python modules.
+  This app starts a Jupyter session and an Ollama server.  The Ollama server can be accessed from Jupyter via the `ollama` package and packages compatible with the OpenAI API.  
