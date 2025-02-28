@@ -1,6 +1,34 @@
 title: Ollama + Jupyter
 cluster: "phoenix-dev"
 attributes:
+  python_env:
+    widget: select
+    label: "Python Environment"
+    options:
+      - [ "Default", "default", data-hide-venv-path: true ]
+      - [ "Custom virtual environment...", "venv" ]
+      #- [ "Custom Apptainer image...", ""]
+    value: "Default"
+    cacheable: true
+  venv_path:
+    widget: "path_selector"
+    label: "Virtual Environment Path"
+    directory: "<%= CurrentUser.home %>"
+    required: true
+    readonly: false
+    show_hidden: false
+    show_files: false
+    cacheable: true
+  #sif_path:
+  #  widget: "path_selector"
+  #  label: "Apptainer Image Path"
+  #  directory: "<%= CurrentUser.home %>"
+  #  #required: true
+  #  readonly: false
+  #  show_hidden: false
+  #  favorites:
+  #    - "<%= CurrentUser.home %>"
+  #    - "<%= CurrentUser.home %>/scratch"
   jupyter_interface:
     widget: select
     label: "Jupyter Interface"
@@ -24,6 +52,8 @@ attributes:
         This is writable and allows you to download/import additional models.
       * *Custom directory...* : A directory chosen by you.  If the location is writeable, you can download/import additional models.  
         It is recommended to use a directory in `~/project`,  `~/shared`, or `~/scratch` space.  
+    value: "PACE shared models"
+    cacheable: true
   model_dir:
     widget: "path_selector"
     label: "Custom Models Directory"
@@ -32,6 +62,7 @@ attributes:
     show_files: false
     readonly: false
     show_hidden: true
+    cacheable: true
   node_type:
     id: node_type
     label: "Node Type"
@@ -73,6 +104,9 @@ attributes:
     value: "inferno"
 
 form:
+  - python_env
+  #- sif_path
+  - venv_path
   - jupyter_interface
   - model_dir_select
   - model_dir
