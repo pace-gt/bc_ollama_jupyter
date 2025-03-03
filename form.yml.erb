@@ -1,9 +1,9 @@
 title: Ollama + Jupyter
-cluster: "phoenix-dev"
+cluster: "ice-rh9"
 attributes:
   python_env:
     widget: select
-    label: "Python Environment"
+    label: "Python environment"
     options:
       - [ "Default", "default", data-hide-venv-path: true, data-hide-sif-path: true ]
       - [ "Custom virtual environment...", "venv", data-hide-sif-path: true ]
@@ -16,7 +16,7 @@ attributes:
       * *Custom Apptainer image...* : Path to an existing Apptainer image file.  The image must have Python and `jupyter` installed and available on the container's `$PATH`.
   venv_path:
     widget: "path_selector"
-    label: "Virtual Environment Path"
+    label: "Virtual environment path"
     directory: "<%= CurrentUser.home %>"
     readonly: false
     show_hidden: false
@@ -26,7 +26,7 @@ attributes:
       - "<%= CurrentUser.home %>"
   sif_path:
     widget: "path_selector"
-    label: "Apptainer Image Path"
+    label: "Apptainer image path"
     directory: "<%= CurrentUser.home %>"
     readonly: false
     show_hidden: false
@@ -35,7 +35,7 @@ attributes:
       - "<%= CurrentUser.home %>"
   jupyter_interface:
     widget: select
-    label: "Jupyter Interface"
+    label: "Jupyter interface"
     options:
       - ["Jupyter Notebook", "notebook"]
       - ["JupyterLab", "lab"]
@@ -43,7 +43,7 @@ attributes:
     cacheable: true
   model_dir_select:
     widget: select
-    label: "Ollama Models Directory"
+    label: "Ollama models directory"
     options:
       - ["PACE shared models", "pace", data-hide-model-dir: true]
       - ["Temporary directory", "tmpdir", data-hide-model-dir: true]
@@ -56,7 +56,7 @@ attributes:
     cacheable: true
   model_dir:
     widget: "path_selector"
-    label: "Custom Models Directory"
+    label: "Custom models directory"
     directory: "<%= CurrentUser.home %>"
     show_files: false
     readonly: false
@@ -66,46 +66,173 @@ attributes:
       - "<%= CurrentUser.home %>"
   node_type:
     id: node_type
-    label: "Node Type"
+    label: "Node type"
     widget: select
     options:
-      - ['NVIDIA GPU V100 16GB', 'V100_16GB']
-      - ['NVIDIA GPU RTX6000', 'RTX_6000']
-    cacheable: true
-  num_gpus:
-    id: num_gpus
-    label: "GPUs"
-    widget: number_field
-    # Min, max, and val will get initialized properly in form.js
-    step: 1
-    value: 1
+      - ['CPU (first avail)', 'cpu',
+          data-hide-num-gpus: true,
+          data-max-num-gpus: 0,
+          data-min-num-gpus: 0,
+          data-max-bc-num-slots: 64,
+          data-max-num-cores: 24,
+          data-max-num-mem: 161,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['Intel CPU', 'intel_cpu',
+          data-hide-num-gpus: true,
+          data-max-num-gpus: 0,
+          data-min-num-gpus: 0,
+          data-max-bc-num-slots: 60,
+          data-max-num-cores: 24,
+          data-max-num-mem: 385,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['Intel CPU localSAS', 'intel_cpu_sas',
+          data-hide-num-gpus: true,
+          data-max-num-gpus: 0,
+          data-min-num-gpus: 0,
+          data-max-bc-num-slots: 1,
+          data-max-num-cores: 24,
+          data-max-num-mem: 385,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['AMD CPU', 'amd_cpu',
+          data-hide-num-gpus: true,
+          data-max-num-gpus: 0,
+          data-min-num-gpus: 0,
+          data-max-bc-num-slots: 4,
+          data-max-num-cores: 64,
+          data-max-num-mem: 515,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU (first avail)', 'nvidia_gpu',
+          data-max-num-gpus: 4,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 35,
+          data-max-num-cores: 64,
+          data-max-num-mem: 515,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU V100 16GB', 'V100_16GB',
+          data-max-num-gpus: 2,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 11,
+          data-max-num-cores: 24,
+          data-max-num-mem: 385,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU V100 32GB', 'V100_32GB',
+          data-max-num-gpus: 4,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 8,
+          data-max-num-cores: 40,
+          data-max-num-mem: 191,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU A100 40GB', 'A100_40GB',
+          data-max-num-gpus: 2,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 2,
+          data-max-num-cores: 64,
+          data-max-num-mem: 515,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU A100 80GB', 'A100_80GB',
+          data-max-num-gpus: 2,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 2,
+          data-max-num-cores: 64,
+          data-max-num-mem: 515,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['AMD GPU M1210', 'MI210',
+          data-max-num-gpus: 2,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 2,
+          data-max-num-cores: 64,
+          data-max-num-mem: 515,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU A40', 'A40',
+          data-max-num-gpus: 2,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 2,
+          data-max-num-cores: 64,
+          data-max-num-mem: 515,
+          # data-max-bc-num-hours: 8
+        ]
+      - ['NVIDIA GPU RTX6000', 'RTX_6000',
+          data-max-num-gpus: 4,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 10,
+          data-max-num-cores: 24,
+          data-max-num-mem: 191,
+          # data-max-bc-num-hours: 8
+        ]
+      - ["NVIDIA GPU L40S", "L40S",
+          data-max-num-gpus: 8,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 4,
+          data-max-num-cores: 64,
+          data-max-num-mem: 773,
+          # data-max-bc-num-hours: 8
+        ]
+      - ["NVIDIA Hopper GPU (first avail)", "HX00",
+          data-max-num-gpus: 8,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 20,
+          data-max-num-cores: 64,
+          data-max-num-mem: 2063,
+          # data-max-bc-num-hours: 16
+        ]
+      - ["NVIDIA GPU H100 HGX", "H100_HGX",
+          data-max-num-gpus: 8,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 20,
+          data-max-num-cores: 64,
+          data-max-num-mem: 2063,
+          # data-max-bc-num-hours: 16
+        ]
+      - ["NVIDIA GPU H200 HGX", "H200_HGX",
+          data-max-num-gpus: 8,
+          data-min-num-gpus: 1,
+          data-max-bc-num-slots: 18,
+          data-max-num-cores: 64,
+          data-max-num-mem: 2063,
+          # data-max-bc-num-hours: 16
+        ]
   num_cores:
-    id: num_cores
     widget: number_field
-    label: "CPUs"
-    # Max and val will get properly initialized in form.js
+    label: "Number of CPUs (cores)"
     min: 1
     step: 1
-    value: 4
   num_mem:
-    id: num_mem
     widget: number_field
-    label: "Memory (GB)"
+    label: "Total memory (GB)"
     min: 1
     step: 1
     value: 32
-  bc_account:
-    label: "Charge Account"
-    required: true
-    cacheable: true
+    help: "Toal memory in GB"
+  num_gpus:
+    label: "Number of GPUs"
+    widget: number_field
+    step: 1
+  #bc_account:
+  #  label: "Charge Account"
+  #  required: true
+  #  cacheable: true
   qos:
     widget: select
-    label: "Quality of Service"
+    label: "Quality of service"
     options:
-      - ["embers"]
-      - ["inferno"]
-    value: "inferno"
-    cacheable: true
+      - ["Default (none)", ""]
+      - ["coc-ice", "coc-ice"]
+      - ["coc-grade", "coc-grade"]
+      - ["coe-ice", "coe-ice"]
+      - ["coe-grade", "coe-grade"]
+      - ["pace-ice", "pace-ice"]
+      - ["pace-grade", "pace-grade"]
+    value: "Default (none)"
 
 form:
   - python_env
@@ -119,6 +246,6 @@ form:
   - num_cores
   - num_mem
   - bc_num_hours
-  - bc_account
+  #- bc_account
   - qos
   - bc_email_on_started

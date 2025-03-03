@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
-#logger -p user.notice -t "ondemand" -- "User: $USER; SubmitHost: $HOSTNAME; JobName: $SLURM_JOB_NAME; Queue: $SLURM_JOB_PARTITION; JobID: $SLURM_JOB_ID"
+logger -p user.notice -t "ondemand" -- "User: $USER; SubmitHost: $HOSTNAME; JobName: $SLURM_JOB_NAME; Queue: $SLURM_JOB_PARTITION; JobID: $SLURM_JOB_ID"
 
 # =======================================
 # Find a port for Ollama
