@@ -1,7 +1,9 @@
 ---
-name: Ollama + Jupyter
+name: Ollama + Jupyter (Beta)
 category: Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |
-  This app starts a Jupyter session and an Ollama server.  The Ollama server can be accessed from Jupyter via the `ollama` package and packages compatible with the OpenAI API.  
+  This OOD app starts an Ollama server with a Jupyter frontend.  You can interact with Ollama via the `ollama` Python package, as well as the `openai` package and other packages compatible with the OpenAI API.  
+
+  **This version of our OOD app is a beta release.  Some use cases may not be supported at this time.** 

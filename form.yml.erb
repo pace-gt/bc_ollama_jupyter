@@ -1,4 +1,4 @@
-title: Ollama + Jupyter
+title: Ollama + Jupyter (Beta)
 cluster: "ice-rh9"
 attributes:
   python_env:
@@ -11,7 +11,7 @@ attributes:
     value: "Default"
     cacheable: true
     help: |
-      * *Default*: Preinstalled environment with the `ollama` and `openai` packages.
+      * *Default*: Preinstalled environment with the `ollama`, `openai`, and `requests` Python packages.
       * *Custom virtual environment..* : The top-level directory of an existing Python virtual environment, created via `venv`.  The env must have the `jupyter` package installed.
       * *Custom Apptainer image...* : Path to an existing Apptainer image file.  The image must have Python and `jupyter` installed and available on the container's `$PATH`.
   venv_path:
@@ -212,7 +212,6 @@ attributes:
     min: 1
     step: 1
     value: 32
-    help: "Toal memory in GB"
   num_gpus:
     label: "Number of GPUs"
     widget: number_field
