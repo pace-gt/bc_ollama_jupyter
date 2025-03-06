@@ -85,7 +85,7 @@ source "<%= context.venv_path %>/bin/activate"
 module list
 
 <%- if context.model_dir_select == "pace" %>
-export OLLAMA_MODELS="/storage/ice1/shared/d-pace_community/ollama"
+export OLLAMA_MODELS="/storage/ice1/shared/d-pace_community/ollama/models"
 <%- elsif context.model_dir_select == "tmpdir" %>
 export OLLAMA_MODELS="$TMPDIR/models"
 mkdir -p "$OLLAMA_MODELS"
