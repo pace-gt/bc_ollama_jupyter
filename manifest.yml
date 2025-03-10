@@ -4,6 +4,8 @@ category: Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |
-  This OOD app starts an Ollama server with a Jupyter frontend.  You can interact with Ollama via the `ollama` Python package, as well as the `openai` package and other packages compatible with the OpenAI API.  
+  This app starts an Ollama server on the backend and provides a Jupyter frontend.  You can interact with Ollama via the Ollama Python API, the OpenAI Python API, and many other downstream applications and frameworks.  
+  
+  For an introduction to the Ollama and OpenAI APIs, see our docs [here](https://gatech.service-now.com/home?id=kb_article_view&sysparm_article=KB0044442).
 
   **This version of our OOD app is a beta release.  Some use cases may not be supported at this time.** 
