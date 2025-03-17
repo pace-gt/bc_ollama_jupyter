@@ -1,6 +1,6 @@
 ---
 name: Ollama + Jupyter (Beta)
-category: Interactive Apps
+category: RHEL9 Interactive Apps
 subcategory: Compute Node Jobs
 role: batch_connect
 description: |

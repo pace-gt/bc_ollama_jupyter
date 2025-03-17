@@ -28,43 +28,35 @@ script:
     - "--mem=<%= num_mem.to_i %>G"
     <%- end -%>
     <%- if node_type == "intel_cpu" -%> 
-    - "--constraint=intel"
-    <%- elsif node_type == "intel_cpu_sas" -%> 
-    - "--constraint=intel,cpu-sas"
+    - "--constraint=rhel9,intel"
     <%- elsif node_type == "amd_cpu" -%>
-    - "--constraint=amd"
+    - "--constraint=rhel9,amd"
     <%- else -%>
     <%- if num_gpus.to_i >0 -%>
-    <%- if node_type == "nvidia_gpu" -%>
-    - "--gres=gpu:<%= num_gpus.to_i %>"
-    - "--constraint=nvidia-gpu"
-    <%- elsif node_type == "V100_16GB" -%>
+    <%- if node_type == "V100_16GB" -%>
     - "--gres=gpu:V100:<%= num_gpus.to_i %>"
-    - "--constraint=V100-16GB"
+    - "--constraint=rhel9,V100-16GB"
     <%- elsif node_type == "V100_32GB" -%>
     - "--gres=gpu:V100:<%= num_gpus.to_i %>" 
-    - "--constraint=V100-32GB"
+    - "--constraint=rhel9,V100-32GB"
     <%- elsif node_type == "A100_40GB" -%>
     - "--gres=gpu:A100:<%= num_gpus.to_i %>" 
-    - "--constraint=A100-40GB"
+    - "--constraint=rhel9,A100-40GB"
     <%- elsif node_type == "A100_80GB" -%>
     - "--gres=gpu:A100:<%= num_gpus.to_i %>" 
-    - "--constraint=A100-80GB"
-    <%- elsif node_type == "RTX_6000" -%>
-    - "--gres=gpu:RTX_6000:<%= num_gpus.to_i %>"
-    <%- elsif node_type == "A40" -%>
-    - "--gres=gpu:A40:<%= num_gpus.to_i %>"
-    <%- elsif node_type == "MI210" -%>
-    - "--gres=gpu:MI210:<%= num_gpus.to_i %>"
-    <%- elsif node_type == "H100_HGX" -%>
-    - "--gres=gpu:H100:<%= num_gpus.to_i %>"
+    - "--constraint=rhel9,A100-80GB"
     <%- elsif node_type == "L40S" -%>
     - "--gres=gpu:L40S:<%= num_gpus.to_i %>"
-    <%- elsif node_type == "H200_HGX" -%>
-    - "--gres=gpu:H200:<%= num_gpus.to_i %>"
-    <%- elsif node_type == "HX00" -%>
-    - "--gres=gpu:<%= num_gpus.to_i %>"
-    - "--constraint=HX00"
+    - "--constraint=rhel9"
+    <%- elsif node_type == "RTX_6000" -%>
+    - "--gres=gpu:RTX_6000:<%= num_gpus.to_i %>"
+    - "--constraint=rhel9"
+    <%- elsif node_type == "H100_HGX" -%>
+    - "--gres=gpu:H100:<%= num_gpus.to_i %>"
+    - "--constraint=rhel9,H100-HGX"
+    <%- elsif node_type == "H100_DGX" -%>
+    - "--gres=gpu:H100:<%= num_gpus.to_i %>"
+    - "--constraint=rhel9,H100-DGX"
     <%- end -%>
     <%- end -%>
     <%- end -%>
