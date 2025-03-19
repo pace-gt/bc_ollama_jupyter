@@ -1,7 +1,7 @@
 ---
 name: Ollama + Jupyter (Beta)
 category: RHEL9 Interactive Apps
-subcategory: Compute Node Jobs
+subcategory: Applications
 role: batch_connect
 description: |
   This app starts an Ollama server on the backend and provides a Jupyter frontend.  You can interact with Ollama via the Ollama Python API, the OpenAI Python API, and many other downstream applications and frameworks.  
