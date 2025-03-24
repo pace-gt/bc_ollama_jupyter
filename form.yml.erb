@@ -184,22 +184,6 @@ attributes:
     label: "Number of GPUs"
     widget: number_field
     step: 1
-  #bc_account:
-  #  label: "Charge Account"
-  #  required: true
-  #  cacheable: true
-  qos:
-    widget: select
-    label: "Quality of service"
-    options:
-      - ["Default (none)", ""]
-      - ["coc-ice", "coc-ice"]
-      - ["coc-grade", "coc-grade"]
-      - ["coe-ice", "coe-ice"]
-      - ["coe-grade", "coe-grade"]
-      - ["pace-ice", "pace-ice"]
-      - ["pace-grade", "pace-grade"]
-    value: "Default (none)"
 
 form:
   - python_env
