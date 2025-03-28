@@ -31,7 +31,7 @@ OOD webform.  It can also be installed in your own Python environments and
 containers
 ([link](https://github.com/ollama/ollama-python?tab=readme-ov-file#install))
 
-## Module import
+### Module import
 
 In the Jupyter session, first import the `ollama` module.  
 
