@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you would like to cite this software, please use the citation below."
+authors:
+- family-names: "Rahaman"
+  given-names: "Ronald"
+  orcid: "https://orcid.org/0000-0002-8917-8934"
+title: "Ollama + Jupyter OOD Application for PACE at Georgia Tech"
+version: 1.0
+date-released: 2025-03-28
+url: "https://github.com/pace-gt/bc_ollama_jupyter"
